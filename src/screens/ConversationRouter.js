@@ -25,12 +25,12 @@ function ConversationRouter (props) {
 
   return (
     <div className={classes.root}>
+      <div style={{ height: 10 }} />
       <Switch>
         <Route path={`${match.path}/:conversationId`}>
           <Conversation />
         </Route>
         <Route path={match.path}>
-          <div style={{ height: 10 }} />
           <ConversationCard id='1' userName='Hello World' />
         </Route>
       </Switch>
