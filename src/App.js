@@ -1,4 +1,5 @@
 import React from 'react'
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
@@ -14,17 +15,20 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-import Drawer from '@material-ui/core/Drawer'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import IconButton from '@material-ui/core/IconButton'
 
 import StarIcon from '@material-ui/icons/Star'
 import ForumIcon from '@material-ui/icons/Forum'
 import ArchiveIcon from '@material-ui/icons/Archive'
 import CreateIcon from '@material-ui/icons/Create'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
 import ConversationRouter from './screens/ConversationRouter'
 
@@ -39,11 +43,30 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   appToolbar: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
+    alignContent: 'center',
+  },
+  toolbarTitle: {
+    display: 'flex',
+    flexDirection: 'column'
+  },
+  loginButton: {
   },
   drawer: {
     width: drawerWidth,
@@ -57,18 +80,41 @@ const useStyles = makeStyles((theme) => ({
   drawerContainer: {
     overflow: 'auto',
   },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: 'none',
   },
 }))
 
 
 function App (props) {
   const classes = useStyles()
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   const menuLink = (path, text, icon) => (
-    <Link to={path}>
+    <Link to={path} onClick={handleDrawerClose}>
       <ListItem button key={text}>
         <ListItemIcon>
           {icon}
@@ -85,26 +131,43 @@ function App (props) {
 
         <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.appToolbar}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
             <Typography variant="h6">
               <Link to="/">
-                <span style={{ fontSize: '1.3em'}}>LeRO</span>  - Leitor Editor de Respostas Ocultas
+                <div className={classes.toolbarTitle}>
+                  <span style={{}}>LeRO</span>
+                  <span style={{ fontSize: '0.65em' }}>Leitor Editor de Respostas Ocultas</span>
+                </div>
               </Link>
             </Typography>
-            <Button color="inherit">
+            <div style={{ flex: '1' }} />
+            <Button color="inherit" className={classes.loginButton}>
               Login
             </Button>
           </Toolbar>
         </AppBar>
 
-        <Drawer
+        <SwipeableDrawer
           className={classes.drawer}
-          variant="permanent"
+          anchor="left"
+          open={open}
           classes={{
             paper: classes.drawerPaper,
           }}
-          anchor="left"
         >
-          <Toolbar />
+          <div className={classes.drawerHeader}>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon style={{ color: 'white' }} />
+            </IconButton>
+          </div>
           <div className={classes.drawerContainer}>
             <Divider />
             <List>
@@ -117,7 +180,7 @@ function App (props) {
               {menuLink("/new", "Nova Conversa", <CreateIcon style={{ color: '#fff' }} />)}
             </List>
           </div>
-        </Drawer>
+        </SwipeableDrawer>
 
         <main>
           <Container component="main" className={classes.main} maxWidth="md">
