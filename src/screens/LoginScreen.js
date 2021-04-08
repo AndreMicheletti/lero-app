@@ -35,7 +35,7 @@ function LoginScreen (props) {
         variant="outlined"
       />
       <div style={{ height: 15 }} />
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="secondary">
         Entrar
       </Button>
     </div>
