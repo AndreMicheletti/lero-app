@@ -2,7 +2,7 @@
   "name": "lero-app",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://gitlab.com/AndreMicheletti/lero-app",
+  "homepage": "/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -15,11 +15,15 @@
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
     "clsx": "latest",
+    "phoenix": "^1.5.8",
     "query-string": "^6.13.6",
     "react": "latest",
     "react-dom": "latest",
+    "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "latest"
+    "react-scripts": "latest",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0"
   },
   "browserslist": {
     "production": [

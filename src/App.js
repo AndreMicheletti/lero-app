@@ -1,5 +1,5 @@
 import React from 'react'
-import clsx from 'clsx';
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 
@@ -31,6 +31,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
 import ConversationRouter from './screens/ConversationRouter'
+import LoginScreen from './screens/LoginScreen'
 
 const drawerWidth = 240;
 
@@ -40,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     minHeight: '100vh',
     flexGrow: 1,
+  },
+  main: {
+    padding: 15,
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -101,7 +105,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-function App (props) {
+function App ({ account }) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false);
 
@@ -159,6 +163,8 @@ function App (props) {
           className={classes.drawer}
           anchor="left"
           open={open}
+          onOpen={handleDrawerOpen}
+          onClose={handleDrawerClose}
           classes={{
             paper: classes.drawerPaper,
           }}
@@ -182,31 +188,42 @@ function App (props) {
           </div>
         </SwipeableDrawer>
 
-        <main>
+        {<main>
           <Container component="main" className={classes.main} maxWidth="md">
-            <Switch>
-              <Route path="/conversations">
-                <ConversationRouter />
-              </Route>
-              <Route path="/favorite">
-                <p>Favorite</p>
-              </Route>
-              <Route path="/archived">
-                <p>Archived</p>
-              </Route>
-              <Route path="/new">
-                <p>New</p>
-              </Route>
-              <Route path="/">
-                <p>Home</p>
-              </Route>
-            </Switch>
+            {account.logged 
+            ? (<Switch>
+                <Route path="/conversations">
+                  <ConversationRouter />
+                </Route>
+                <Route path="/favorite">
+                  <p>Favorite</p>
+                </Route>
+                <Route path="/archived">
+                  <p>Archived</p>
+                </Route>
+                <Route path="/new">
+                  <p>New</p>
+                </Route>
+                <Route path="/">
+                  <p>Home</p>
+                </Route>
+              </Switch>)
+            : (
+              <LoginScreen />
+            )}
           </Container>
-        </main>
+        </main>}
 
       </div>
     </Router>
   )
 }
 
-export default App;
+function mapStateToProps(state) {
+  console.log(state)
+  return {
+    account: state.account
+  }
+}
+
+export default connect(mapStateToProps)(App)
