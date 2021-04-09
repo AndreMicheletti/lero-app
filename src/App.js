@@ -138,14 +138,13 @@ function App ({ account, ...props  }) {
             <Typography variant="h6">
               <Link to="/">
                 <div className={classes.toolbarTitle}>
-                  <span style={{}}>LeRO</span>
-                  <span style={{ fontSize: '0.65em' }}>Leitor Editor de Respostas Ocultas</span>
+                  <span>LeRO</span>
                 </div>
               </Link>
             </Typography>
             <div style={{ flex: '1' }} />
-            <SocketStatus />
             <UserStatus />
+            <SocketStatus />
           </Toolbar>
         </AppBar>
 

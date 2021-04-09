@@ -53,8 +53,12 @@ function conversationReducer(state = INITIAL_STATE, action) {
       return {...state, currentConversation: {...state.currentConversation, messages: []}}
     
     case CONVERSATION_RECEIVED_MESSAGE:
-      const messages = [...state.currentConversation.messages, action.payload]
-      return {...state, currentConversation: {...state.currentConversation, messages: sortMessages(messages) }}
+      if (state.currentConversation.id) {
+        const messages = [...state.currentConversation.messages, action.payload]
+        return {...state, currentConversation: {...state.currentConversation, messages: sortMessages(messages) }}
+      } else {
+        return state
+      }
 
     case SELECT_CONVERSATION:
       return {...state, currentConversation: action.payload}

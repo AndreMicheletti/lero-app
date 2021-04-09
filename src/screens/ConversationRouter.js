@@ -24,11 +24,10 @@ const useStyles = makeStyles((theme) => ({
 function ConversationRouter ({ account, conversations, loading, fetchConversations }) {
   let match = useRouteMatch();
   const classes = useStyles()
-  const { currentConversation } = conversations
 
   React.useEffect(() => {
     fetchConversations()
-  }, [currentConversation])
+  }, [])
 
   const renderConversations = () => {
     if (loading) {

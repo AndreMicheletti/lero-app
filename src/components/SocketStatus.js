@@ -10,7 +10,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     alignItems: 'baseline',
     padding: theme.spacing(1),
-    marginRight: 8,
+    marginLeft: 8,
     borderRadius: 40
   },
 }))
