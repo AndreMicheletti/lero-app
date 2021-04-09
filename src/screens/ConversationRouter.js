@@ -12,10 +12,8 @@ import ConversationCard from '../components/ConversationCard'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-    flexGrow: 1,
+    overflow: 'hidden',
+    maxHeight: '100vh'
   },
 }))
 
@@ -27,7 +25,7 @@ function ConversationRouter (props) {
     <div className={classes.root}>
       <div style={{ height: 10 }} />
       <Switch>
-        <Route path={`${match.path}/:conversationId`}>
+        <Route path={`${match.path}conversations/:conversationId`}>
           <Conversation />
         </Route>
         <Route path={match.path}>

@@ -17,6 +17,27 @@
         color: inherit;
         text-decoration: inherit;
       }
+      /* width */
+      *::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      /* Track */
+      *::-webkit-scrollbar-track {
+        background: #33333300; 
+      }
+      
+      /* Handle */
+      *::-webkit-scrollbar-thumb {
+        background: #ffffffaa;
+        width: 5px;
+        border-radius: 20px;
+      }
+
+      /* Handle on hover */
+      *::-webkit-scrollbar-thumb:hover {
+        background: #ffffffaa; 
+      }
     </style>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.

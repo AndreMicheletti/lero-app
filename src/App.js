@@ -14,7 +14,6 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import Divider from '@material-ui/core/Divider'
 import List from '@material-ui/core/List'
@@ -29,9 +28,13 @@ import ArchiveIcon from '@material-ui/icons/Archive'
 import CreateIcon from '@material-ui/icons/Create'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 import ConversationRouter from './screens/ConversationRouter'
 import LoginScreen from './screens/LoginScreen'
+import UserStatus from './components/UserStatus'
+
+import { doLogout } from './store/actions/accountActions'
 
 const drawerWidth = 240;
 
@@ -47,18 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   },
   appToolbar: {
     display: 'flex',
@@ -69,8 +60,6 @@ const useStyles = makeStyles((theme) => ({
   toolbarTitle: {
     display: 'flex',
     flexDirection: 'column'
-  },
-  loginButton: {
   },
   drawer: {
     width: drawerWidth,
@@ -105,7 +94,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 
-function App ({ account }) {
+function App ({ account, ...props  }) {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false);
 
@@ -153,9 +142,7 @@ function App ({ account }) {
               </Link>
             </Typography>
             <div style={{ flex: '1' }} />
-            <Button color="inherit" className={classes.loginButton}>
-              Login
-            </Button>
+            <UserStatus />
           </Toolbar>
         </AppBar>
 
@@ -177,24 +164,35 @@ function App ({ account }) {
           <div className={classes.drawerContainer}>
             <Divider />
             <List>
-              {menuLink("/conversations", "Conversas", <ForumIcon style={{ color: '#fff' }} />)}
+              {menuLink("/", "Conversas", <ForumIcon style={{ color: '#fff' }} />)}
               {menuLink("/favorite", "Favoritos", <StarIcon style={{ color: '#fff' }} />)}
               {menuLink("/archived", "Arquivados", <ArchiveIcon style={{ color: '#fff' }} />)}
             </List>
-            <Divider />
-            <List>
-              {menuLink("/new", "Nova Conversa", <CreateIcon style={{ color: '#fff' }} />)}
-            </List>
+            {account.logged && (
+              <React.Fragment>
+                <Divider />
+                <List>
+                  {menuLink("/new", "Nova Conversa", <CreateIcon style={{ color: '#fff' }} />)}
+                </List>
+                <List>
+                  <ListItem onClick={() => {
+                    props.doLogout()
+                    handleDrawerClose()
+                  }} button key='logout'>
+                    <ListItemIcon>
+                      <ExitToAppIcon style={{ color: '#fff' }}/>
+                    </ListItemIcon>
+                    <ListItemText primary='Sair' />
+                  </ListItem>
+                </List>
+              </React.Fragment>)
+            }
           </div>
         </SwipeableDrawer>
-
         {<main>
           <Container component="main" className={classes.main} maxWidth="md">
             {account.logged 
             ? (<Switch>
-                <Route path="/conversations">
-                  <ConversationRouter />
-                </Route>
                 <Route path="/favorite">
                   <p>Favorite</p>
                 </Route>
@@ -205,7 +203,7 @@ function App ({ account }) {
                   <p>New</p>
                 </Route>
                 <Route path="/">
-                  <p>Home</p>
+                  <ConversationRouter />
                 </Route>
               </Switch>)
             : (
@@ -220,10 +218,15 @@ function App ({ account }) {
 }
 
 function mapStateToProps(state) {
-  console.log(state)
   return {
     account: state.account
   }
 }
 
-export default connect(mapStateToProps)(App)
+function mapDispatchToProps (dispatch) {
+  return {
+    doLogout: () => dispatch(doLogout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

@@ -14,6 +14,7 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
+    "axios": "^0.21.1",
     "clsx": "latest",
     "phoenix": "^1.5.8",
     "query-string": "^6.13.6",
