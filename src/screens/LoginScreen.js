@@ -46,7 +46,8 @@ function LoginScreen (props) {
     }
   }, [])
 
-  const tryLogin = () => {
+  const tryLogin = (e) => {
+    e.preventDefault()
     if (secretCode === '' || password === '') {
       props.enqueueSnackbar('Preencha os campos')
     } else {
@@ -60,29 +61,31 @@ function LoginScreen (props) {
 
   return (
     <div className={classes.root}>
-      <Backdrop className={classes.backdrop} open={props.account.loading}>
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <TextField
-        label="Código secreto"
-        value={secretCode}
-        onChange={handleChangeCode}
-        variant="outlined"
-        color="secondary"
-      />
-      <div style={{ height: 10 }} />
-      <TextField
-        type="password"
-        value={password}
-        onChange={handleChangePass}
-        label="Senha"
-        variant="outlined"
-        color="secondary"
-      />
-      <div style={{ height: 15 }} />
-      <Button variant="contained" color="secondary" onClick={tryLogin}>
-        Entrar
-      </Button>
+      <form onSubmit={tryLogin}>
+        <Backdrop className={classes.backdrop} open={props.account.loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        <TextField
+          label="Código secreto"
+          value={secretCode}
+          onChange={handleChangeCode}
+          variant="outlined"
+          color="secondary"
+        />
+        <div style={{ height: 10 }} />
+        <TextField
+          type="password"
+          value={password}
+          onChange={handleChangePass}
+          label="Senha"
+          variant="outlined"
+          color="secondary"
+        />
+        <div style={{ height: 15 }} />
+        <Button type="submit" variant="contained" color="secondary">
+          Entrar
+        </Button>
+      </form>
     </div>
   )
 }

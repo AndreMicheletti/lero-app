@@ -28,7 +28,8 @@ function NewConversation ({ account, startConversation, enqueueSnackbar }) {
     setText(event.target.value);
   };
 
-  const tryStartConversation = () => {
+  const tryStartConversation = (e) => {
+    e.preventDefault();
     if (secretCode && secretCode !== '') {
       startConversation(secretCode, (conversationId) => {
         history.push("/conversations/" + conversationId)
@@ -42,17 +43,19 @@ function NewConversation ({ account, startConversation, enqueueSnackbar }) {
 
   return (
     <div className={classes.root}>
-      <TextField
-        label="Código secreto"
-        color="secondary"
-        value={secretCode}
-        onChange={handleChange}
-        variant="outlined"
-      />
-      <div style={{ height: 15 }} />
-      <Button variant="contained" color="secondary" onClick={tryStartConversation}>
-        Iniciar Conversa
-      </Button>
+      <form onSubmit={tryStartConversation}>
+        <TextField
+          label="Código secreto"
+          color="secondary"
+          value={secretCode}
+          onChange={handleChange}
+          variant="outlined"
+        />
+        <div style={{ height: 15 }} />
+        <Button type="submit" variant="contained" color="secondary">
+          Iniciar Conversa
+        </Button>
+      </form>
     </div>
   )
 }

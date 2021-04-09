@@ -106,7 +106,8 @@ function Conversation ({
     }
   }, [socketConnected])
 
-  const trySendMessage = () => {
+  const trySendMessage = (e) => {
+    e.preventDefault()
     if (!channel) {
       enqueueSnackbar('Não conectado ao canal')
       return
@@ -140,16 +141,16 @@ function Conversation ({
           })}
         </div>
         <Divider />
-        <div className={classes.inputBar}>
+        <form className={classes.inputBar} onSubmit={trySendMessage}>
           <TextField
             color="primary"
             value={text}
             onChange={handleChange}
           />
-          <IconButton aria-label="delete" className={classes.margin} size="small" onClick={trySendMessage}>
+          <IconButton aria-label="delete" className={classes.margin} size="small" type="submit">
             <SendIcon fontSize="default" style={{ color: '#fff' }} />
           </IconButton>
-        </div>
+        </form>
       </Paper>
     </div>
   )
