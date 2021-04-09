@@ -19,8 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function MessageBubble ({ content, time, outbound }) {
+function MessageBubble ({ content, time, direction }) {
   const classes = useStyles()
+  const outbound = direction === 'out'
 
   const normalStyle = {
     gridTemplateAreas: '"bubble none"',

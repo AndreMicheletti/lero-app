@@ -1,9 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from "react-router-dom"
 
 import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
+import { selectConversation } from '../store/actions/conversationActions'
 
 const useStyles = makeStyles((theme) => ({
   conversation: {
@@ -18,17 +20,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function ConversationCard ({ id, userName }) {
+function ConversationCard ({ id, conversation, selectConversation }) {
   const classes = useStyles()
 
   return (
-    <Link to={`/conversations/${id}`}>
+    <Link to={`/conversations/${id}`} onClick={() => selectConversation(conversation)}>
       <Paper className={classes.conversation}>
         <Avatar />
-        <p>{userName}</p>
+        <p>{conversation.title}</p>
       </Paper>
     </Link>
   )
 }
 
-export default ConversationCard
+const mapDispatchToProps = dispatch => {
+  return {
+    selectConversation: (conversation) => dispatch(selectConversation(conversation))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(ConversationCard)

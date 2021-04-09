@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 
 import {
@@ -17,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function ConversationRouter (props) {
+function ConversationRouter ({ account, conversations, loading }) {
   let match = useRouteMatch();
   const classes = useStyles()
 
@@ -29,11 +30,21 @@ function ConversationRouter (props) {
           <Conversation />
         </Route>
         <Route path={match.path}>
-          <ConversationCard id='1' userName='Hello World' />
+          {conversations.map(conversation => {
+            return (<ConversationCard key={conversation.id} id={conversation.id} conversation={conversation} />)
+          })}
         </Route>
       </Switch>
     </div>
   )
 }
 
-export default ConversationRouter
+const mapStateToProps = state => {
+  return {
+    account: state.account,
+    conversations: state.conversation.conversations,
+    loading: state.conversation.loading,
+  }
+}
+
+export default connect(mapStateToProps)(ConversationRouter)

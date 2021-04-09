@@ -1,6 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 
 import { useParams } from "react-router-dom";
 
@@ -42,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
     overflowX: 'hidden',
     overflowY: 'overlay',
     paddingRight: 20,
+    paddingBottom: 5,
   },
   inputBar: {
     display: 'grid',
@@ -52,13 +54,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Conversation (props) {
-  let { conversationId } = useParams();
+function Conversation ({ conversation }) {
   const classes = useStyles()
   const [text, setText] = React.useState('');
   const handleChange = (event) => {
     setText(event.target.value);
   };
+  let history = useHistory()
+  React.useEffect(() => {
+    if (!conversation || conversation.messages === undefined) {
+      history.push("/")
+      return (<span></span>)
+    }
+  }, [])
 
   return (
     <div className={classes.root}>
@@ -67,20 +75,14 @@ function Conversation (props) {
           <Link to="/">
             <ArrowBackIcon />
           </Link>
-          <p>Hello World</p>
+          <p>{conversation.title}</p>
           <Avatar />
         </div>
         <Divider />
         <div className={classes.messages}>
-          <MessageBubble content="Oi" />
-          <MessageBubble content="Oi" outbound={true} />
-          <MessageBubble content="Mensagem grandona" outbound={true} />
-          <MessageBubble content="Vms ver oq acontece" />
-          <MessageBubble content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" outbound={true} />
-          <MessageBubble content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
-          <MessageBubble content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
-          <MessageBubble content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
-          <MessageBubble content="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+          {conversation.messages && conversation.messages.map(message => {
+            return (<MessageBubble key={message.id} content={message.content} direction={message.direction} />)
+          })}
         </div>
         <Divider />
         <div className={classes.inputBar}>
@@ -98,4 +100,10 @@ function Conversation (props) {
   )
 }
 
-export default Conversation
+const mapStateToProps = state => {
+  return {
+    conversation: state.conversation.currentConversation
+  }
+}
+
+export default connect(mapStateToProps)(Conversation)
