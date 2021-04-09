@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT } from '../actionTypes'
 
-export const doLogin = (secretCode, password) => async dispatch => {
+export const doLogin = (secretCode, password, onSuccess, onError) => async dispatch => {
   dispatch({ type: LOGIN_REQUEST})
   try {
     const loginResponse = await axios.post('http://localhost:4000/api/login', { 'secret_code': secretCode, 'password': password });
@@ -14,9 +14,11 @@ export const doLogin = (secretCode, password) => async dispatch => {
     if (!userResponse.data.success) throw Error("could not fetch user data")
 
     dispatch({ type: LOGIN_SUCCESS, payload: { token, user: userResponse.data.user } })
+    onSuccess()
   } catch (e) {
     console.warn(e)
     dispatch({ type: LOGIN_FAILURE })
+    onError()
   }
 }
 

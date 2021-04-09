@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 import { doLogin } from '../store/actions/accountActions'
+import { connectSocket } from '../store/actions/socketActions'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -31,7 +32,11 @@ function LoginScreen (props) {
     if (secretCode === '' || password === '') {
       props.enqueueSnackbar('Preencha os campos')
     } else {
-      props.doLogin(secretCode, password)
+      props.doLogin(secretCode, password, () => {
+        props.connectSocket()
+      }, () => {
+        props.enqueueSnackbar('Login falhou. Verifique os dados.')
+      })
     }
   }
 
@@ -69,7 +74,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    doLogin: (secretCode, password) => dispatch(doLogin(secretCode, password))
+    doLogin: (secretCode, password, onSuccess, onError) => dispatch(doLogin(secretCode, password, onSuccess, onError)),
+    connectSocket: () => dispatch(connectSocket()),
   }
 }
 
