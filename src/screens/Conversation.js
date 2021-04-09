@@ -17,7 +17,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 import MessageBubble from '../components/MessageBubble'
 
-import { fetchCurrentMessages } from '../store/actions/conversationActions'
+import { fetchCurrentMessages, onReceivedMessage } from '../store/actions/conversationActions'
+import { joinChannel } from '../socket'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -57,10 +58,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Conversation ({ conversation, fetchCurrentMessages }) {
+function Conversation ({ currentUser, conversation, fetchCurrentMessages, onReceivedMessage, socket }) {
   let history = useHistory()
   const classes = useStyles()
-  const [text, setText] = React.useState('');
+  const [text, setText] = React.useState('')
+  const [channel, setChannel] = React.useState(null)
   const handleChange = (event) => {
     setText(event.target.value);
   };
@@ -73,7 +75,26 @@ function Conversation ({ conversation, fetchCurrentMessages }) {
       enqueueSnackbar('Erro ao carregar mensagens')
       history.push("/")
     })
+    setChannel(joinChannel(socket, conversation.id, (message) => {
+      onReceivedMessage(message, currentUser)
+    }))
   }, [])
+
+  const trySendMessage = () => {
+    if (!channel) {
+      enqueueSnackbar('Não conectado ao canal')
+      return
+    }
+    if (!text || text === '') {
+      enqueueSnackbar('Digite a mensagem')
+      return
+    }
+    try {
+      channel.push('send_message', {content: text})
+    } finally {
+      setText('')
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -98,7 +119,7 @@ function Conversation ({ conversation, fetchCurrentMessages }) {
             value={text}
             onChange={handleChange}
           />
-          <IconButton aria-label="delete" className={classes.margin} size="small">
+          <IconButton aria-label="delete" className={classes.margin} size="small" onClick={trySendMessage}>
             <SendIcon fontSize="default" style={{ color: '#fff' }} />
           </IconButton>
         </div>
@@ -109,12 +130,15 @@ function Conversation ({ conversation, fetchCurrentMessages }) {
 
 const mapStateToProps = state => {
   return {
-    conversation: state.conversation.currentConversation
+    currentUser: state.account.user,
+    conversation: state.conversation.currentConversation,
+    socket: state.socketConnection.socket
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
+    onReceivedMessage: (message, user) => dispatch(onReceivedMessage(message, user)),
     fetchCurrentMessages: (conversationId, onSuccess, onError) => dispatch(fetchCurrentMessages(conversationId, onSuccess, onError))
   }
 }

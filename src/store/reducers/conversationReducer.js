@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
   LOGOUT,
   SELECT_CONVERSATION,
@@ -10,6 +11,7 @@ import {
   FETCH_CURRENT_MESSAGES_REQUEST,
   FETCH_CURRENT_MESSAGES_SUCCESS,
   FETCH_CURRENT_MESSAGES_FAILURE,
+  CONVERSATION_RECEIVED_MESSAGE
 } from '../actionTypes'
 
 const INITIAL_STATE = {
@@ -45,9 +47,13 @@ function conversationReducer(state = INITIAL_STATE, action) {
       return {...state, conversations: [], loading: false}
 
     case FETCH_CURRENT_MESSAGES_SUCCESS:
-      return {...state, currentConversation: {...state.currentConversation, messages: action.payload}}
+      return {...state, currentConversation: {...state.currentConversation, messages: sortMessages(action.payload) }}
     case FETCH_CURRENT_MESSAGES_FAILURE:
       return {...state, currentConversation: {...state.currentConversation, messages: []}}
+    
+    case CONVERSATION_RECEIVED_MESSAGE:
+      const messages = [...state.currentConversation.messages, action.payload]
+      return {...state, currentConversation: {...state.currentConversation, messages: sortMessages(messages) }}
 
     case SELECT_CONVERSATION:
       return {...state, currentConversation: action.payload}
@@ -56,6 +62,10 @@ function conversationReducer(state = INITIAL_STATE, action) {
     default:
       return state
   }
+}
+
+function sortMessages (messages) {
+  return _.orderBy(messages, 'time', 'desc')
 }
 
 export default conversationReducer

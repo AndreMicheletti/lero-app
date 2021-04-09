@@ -10,9 +10,22 @@ import {
   FETCH_CURRENT_MESSAGES_REQUEST,
   FETCH_CURRENT_MESSAGES_SUCCESS,
   FETCH_CURRENT_MESSAGES_FAILURE,
+  CONVERSATION_RECEIVED_MESSAGE
 } from '../actionTypes'
 
 export const selectConversation = (conversation) => { return {type: SELECT_CONVERSATION, payload: conversation} }
+
+export const onReceivedMessage = (message, user) => {
+  return {
+    type: CONVERSATION_RECEIVED_MESSAGE,
+    payload: {
+      id: message.id,
+      content: message.content,
+      time: message.time,
+      direction: message.user_id === user.id ? 'out' : 'in'
+    }
+  }
+}
 
 export const fetchConversations = () => async dispatch => {
   dispatch({ type: FETCH_CONVERSATION_REQUEST})

@@ -6,5 +6,5 @@ import socketReducer from './socketReducer'
 export default combineReducers({
   account: accountReducer,
   conversation: conversationReducer,
-  socket: socketReducer
+  socketConnection: socketReducer
 })
