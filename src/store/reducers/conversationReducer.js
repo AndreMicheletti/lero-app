@@ -1,4 +1,10 @@
-import { LOGOUT, SELECT_CONVERSATION } from '../actionTypes'
+import {
+  LOGOUT,
+  SELECT_CONVERSATION,
+  FETCH_CONVERSATION_REQUEST,
+  FETCH_CONVERSATION_SUCCESS,
+  FETCH_CONVERSATION_FAILURE
+} from '../actionTypes'
 
 const INITIAL_STATE = {
   conversations: [
@@ -25,6 +31,12 @@ const INITIAL_STATE = {
 
 function conversationReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case FETCH_CONVERSATION_REQUEST:
+      return {...state, loading: true}
+    case FETCH_CONVERSATION_SUCCESS:
+      return {...state, conversations: action.payload, loading: false}
+    case FETCH_CONVERSATION_FAILURE:
+      return {...state, conversations:[], loading: false}
     case SELECT_CONVERSATION:
       return {...state, currentConversation: action.payload}
     case LOGOUT:

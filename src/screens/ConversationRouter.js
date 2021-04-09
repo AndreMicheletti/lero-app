@@ -11,6 +11,8 @@ import {
 import Conversation from './Conversation'
 import ConversationCard from '../components/ConversationCard'
 
+import { fetchConversations } from '../store/actions/conversationActions'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     overflow: 'hidden',
@@ -18,9 +20,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function ConversationRouter ({ account, conversations, loading }) {
+function ConversationRouter ({ account, conversations, loading, fetchConversations }) {
   let match = useRouteMatch();
   const classes = useStyles()
+  React.useEffect(() => {
+    fetchConversations()
+  }, [])
+
+  const renderConversations = () => {
+    if (loading) {
+      return <span>loading...</span>
+    }
+
+    if (!conversations || conversations.length == 0) {
+      return <span>Nenhuma conversa...</span>
+    }
+
+    conversations.map(conversation => {
+      return (<ConversationCard key={conversation.id} id={conversation.id} conversation={conversation} />)
+    })
+  }
 
   return (
     <div className={classes.root}>
@@ -30,9 +49,7 @@ function ConversationRouter ({ account, conversations, loading }) {
           <Conversation />
         </Route>
         <Route path={match.path}>
-          {conversations.map(conversation => {
-            return (<ConversationCard key={conversation.id} id={conversation.id} conversation={conversation} />)
-          })}
+          {renderConversations()}
         </Route>
       </Switch>
     </div>
@@ -47,4 +64,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ConversationRouter)
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchConversations: () => dispatch(fetchConversations())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ConversationRouter)
