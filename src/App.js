@@ -101,7 +101,8 @@ function App ({ account, ...props  }) {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    if (account.logged)
+      setOpen(true);
   };
 
   const handleDrawerClose = () => {
@@ -126,15 +127,17 @@ function App ({ account, ...props  }) {
 
         <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.appToolbar}>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              onClick={handleDrawerOpen}
-              edge="start"
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
+            {account.logged && (
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                onClick={handleDrawerOpen}
+                edge="start"
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+            )}
             <Typography variant="h6">
               <Link to="/">
                 <div className={classes.toolbarTitle}>
