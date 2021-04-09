@@ -3,7 +3,13 @@ import {
   SELECT_CONVERSATION,
   FETCH_CONVERSATION_REQUEST,
   FETCH_CONVERSATION_SUCCESS,
-  FETCH_CONVERSATION_FAILURE
+  FETCH_CONVERSATION_FAILURE,
+  START_CONVERSATION_REQUEST,
+  START_CONVERSATION_SUCCESS,
+  START_CONVERSATION_FAILURE,
+  FETCH_CURRENT_MESSAGES_REQUEST,
+  FETCH_CURRENT_MESSAGES_SUCCESS,
+  FETCH_CURRENT_MESSAGES_FAILURE,
 } from '../actionTypes'
 
 const INITIAL_STATE = {
@@ -36,7 +42,13 @@ function conversationReducer(state = INITIAL_STATE, action) {
     case FETCH_CONVERSATION_SUCCESS:
       return {...state, conversations: action.payload, loading: false}
     case FETCH_CONVERSATION_FAILURE:
-      return {...state, conversations:[], loading: false}
+      return {...state, conversations: [], loading: false}
+
+    case FETCH_CURRENT_MESSAGES_SUCCESS:
+      return {...state, currentConversation: {...state.currentConversation, messages: action.payload}}
+    case FETCH_CURRENT_MESSAGES_FAILURE:
+      return {...state, currentConversation: {...state.currentConversation, messages: []}}
+
     case SELECT_CONVERSATION:
       return {...state, currentConversation: action.payload}
     case LOGOUT:

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link, useHistory } from "react-router-dom"
+import { withSnackbar } from 'notistack'
 
 import { useParams } from "react-router-dom";
 
@@ -15,6 +16,8 @@ import SendIcon from '@material-ui/icons/Send'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 import MessageBubble from '../components/MessageBubble'
+
+import { fetchCurrentMessages } from '../store/actions/conversationActions'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,18 +57,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Conversation ({ conversation }) {
+function Conversation ({ conversation, fetchCurrentMessages }) {
+  let history = useHistory()
   const classes = useStyles()
   const [text, setText] = React.useState('');
   const handleChange = (event) => {
     setText(event.target.value);
   };
-  let history = useHistory()
+
   React.useEffect(() => {
-    if (!conversation || conversation.messages === undefined) {
+    fetchCurrentMessages(
+      conversation.id,
+      () => {},
+      () => {
+      enqueueSnackbar('Erro ao carregar mensagens')
       history.push("/")
-      return (<span></span>)
-    }
+    })
   }, [])
 
   return (
@@ -106,4 +113,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(Conversation)
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchCurrentMessages: (conversationId, onSuccess, onError) => dispatch(fetchCurrentMessages(conversationId, onSuccess, onError))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withSnackbar(Conversation))

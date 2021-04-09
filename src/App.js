@@ -32,6 +32,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp'
 
 import ConversationRouter from './screens/ConversationRouter'
 import LoginScreen from './screens/LoginScreen'
+import NewConversation from './screens/NewConversation'
 import UserStatus from './components/UserStatus'
 
 import { doLogout } from './store/actions/accountActions'
@@ -200,7 +201,7 @@ function App ({ account, ...props  }) {
                   <p>Archived</p>
                 </Route>
                 <Route path="/new">
-                  <p>New</p>
+                  <NewConversation />
                 </Route>
                 <Route path="/">
                   <ConversationRouter />

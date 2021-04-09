@@ -28,6 +28,7 @@ function LoginScreen (props) {
         label="Código secreto"
         defaultValue=""
         variant="outlined"
+        color="secondary"
       />
       <div style={{ height: 10 }} />
       <TextField
@@ -35,6 +36,7 @@ function LoginScreen (props) {
         label="Senha"
         defaultValue=""
         variant="outlined"
+        color="secondary"
       />
       <div style={{ height: 15 }} />
       <Button variant="contained" color="secondary" onClick={() => props.doLogin('admin', '123')}>

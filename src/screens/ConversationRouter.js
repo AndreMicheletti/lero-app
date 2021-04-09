@@ -12,6 +12,7 @@ import Conversation from './Conversation'
 import ConversationCard from '../components/ConversationCard'
 
 import { fetchConversations } from '../store/actions/conversationActions'
+import { ContactSupportOutlined } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,8 +37,8 @@ function ConversationRouter ({ account, conversations, loading, fetchConversatio
       return <span>Nenhuma conversa...</span>
     }
 
-    conversations.map(conversation => {
-      return (<ConversationCard key={conversation.id} id={conversation.id} conversation={conversation} />)
+    return conversations.map(convs => {
+      return (<ConversationCard key={convs.id} id={convs.id} conversation={convs} />)
     })
   }
 

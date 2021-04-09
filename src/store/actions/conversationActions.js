@@ -3,7 +3,13 @@ import {
   SELECT_CONVERSATION,
   FETCH_CONVERSATION_REQUEST,
   FETCH_CONVERSATION_SUCCESS,
-  FETCH_CONVERSATION_FAILURE
+  FETCH_CONVERSATION_FAILURE,
+  START_CONVERSATION_REQUEST,
+  START_CONVERSATION_SUCCESS,
+  START_CONVERSATION_FAILURE,
+  FETCH_CURRENT_MESSAGES_REQUEST,
+  FETCH_CURRENT_MESSAGES_SUCCESS,
+  FETCH_CURRENT_MESSAGES_FAILURE,
 } from '../actionTypes'
 
 export const selectConversation = (conversation) => { return {type: SELECT_CONVERSATION, payload: conversation} }
@@ -17,11 +23,53 @@ export const fetchConversations = () => async dispatch => {
       headers: { 'Authorization': `Bearer ${token}`}
     });
     const {success, conversations} = response.data;
-    if (!success) throw Error("could not log in")
+    if (!success) throw Error("could fetch conversations")
 
     dispatch({ type: FETCH_CONVERSATION_SUCCESS, payload: conversations })
   } catch (e) {
     console.warn(e)
     dispatch({ type: FETCH_CONVERSATION_FAILURE })
+  }
+}
+
+export const startConversation = (secretCode, onSuccess, onError) => async dispatch => {
+  dispatch({ type: START_CONVERSATION_REQUEST})
+  try {
+    const token = localStorage.getItem('auth_token')
+
+    const response = await axios.post('http://localhost:4000/api/message',
+    {
+      'content': 'Vamos bater um lero',
+      'secret_code': secretCode
+    },
+    { headers: { 'Authorization': `Bearer ${token}`} });
+    const {success, message} = response.data;
+    if (!success) throw response.data
+
+    dispatch({ type: START_CONVERSATION_SUCCESS, payload: message })
+    onSuccess(message.conversation_id)
+  } catch (e) {
+    console.warn(e)
+    dispatch({ type: START_CONVERSATION_FAILURE })
+    onError()
+  }
+}
+
+export const fetchCurrentMessages = (conversationId, onSuccess, onError) => async dispatch => {
+  dispatch({ type: FETCH_CURRENT_MESSAGES_REQUEST})
+  try {
+    const token = localStorage.getItem('auth_token')
+
+    const response = await axios.get(`http://localhost:4000/api/conversations/${conversationId}/messages`,
+    { headers: { 'Authorization': `Bearer ${token}`} });
+    const {success, messages} = response.data;
+    if (!success) throw response.data
+
+    dispatch({ type: FETCH_CURRENT_MESSAGES_SUCCESS, payload: messages })
+    onSuccess()
+  } catch (e) {
+    console.warn(e)
+    dispatch({ type: FETCH_CURRENT_MESSAGES_FAILURE })
+    onError()
   }
 }
