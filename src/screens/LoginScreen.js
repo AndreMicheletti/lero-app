@@ -3,11 +3,14 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { withSnackbar } from 'notistack'
 
+import Backdrop from '@material-ui/core/Backdrop'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-import { doLogin } from '../store/actions/accountActions'
+import { doLogin, doAutoLogin } from '../store/actions/accountActions'
 import { connectSocket } from '../store/actions/socketActions'
+import { useHistory } from 'react-router'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,14 +22,29 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: 15,
     padding: 8
   },
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    color: '#fff',
+  },
 }))
 
 function LoginScreen (props) {
   const classes = useStyles()
+  const history = useHistory()
   const [secretCode, setCode] = React.useState('');
   const [password, setPass] = React.useState('');
   const handleChangeCode = (event) => setCode(event.target.value)
   const handleChangePass = (event) => setPass(event.target.value)
+
+  React.useEffect(() => {
+    const token = localStorage.getItem('auth_token');
+    if (!!token && token !== '') {
+      props.doAutoLogin(token, () => {
+        props.connectSocket()
+        history.push("/")
+      }, () => {})
+    }
+  }, [])
 
   const tryLogin = () => {
     if (secretCode === '' || password === '') {
@@ -42,6 +60,9 @@ function LoginScreen (props) {
 
   return (
     <div className={classes.root}>
+      <Backdrop className={classes.backdrop} open={props.account.loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <TextField
         label="Código secreto"
         value={secretCode}
@@ -75,6 +96,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
   return {
     doLogin: (secretCode, password, onSuccess, onError) => dispatch(doLogin(secretCode, password, onSuccess, onError)),
+    doAutoLogin: (token, onSuccess, onError) => dispatch(doAutoLogin(token, onSuccess, onError)),
     connectSocket: () => dispatch(connectSocket()),
   }
 }

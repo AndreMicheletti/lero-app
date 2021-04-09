@@ -10,10 +10,12 @@ import {
   FETCH_CURRENT_MESSAGES_REQUEST,
   FETCH_CURRENT_MESSAGES_SUCCESS,
   FETCH_CURRENT_MESSAGES_FAILURE,
-  CONVERSATION_RECEIVED_MESSAGE
+  CONVERSATION_RECEIVED_MESSAGE,
+  CLEAR_SELECT_CONVERSATION
 } from '../actionTypes'
 
 export const selectConversation = (conversation) => { return {type: SELECT_CONVERSATION, payload: conversation} }
+export const clearSelectConversation = () => { return {type: CLEAR_SELECT_CONVERSATION } }
 
 export const onReceivedMessage = (message, user) => {
   return {

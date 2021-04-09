@@ -17,12 +17,19 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 import MessageBubble from '../components/MessageBubble'
 
-import { fetchCurrentMessages, onReceivedMessage } from '../store/actions/conversationActions'
+import { fetchCurrentMessages, onReceivedMessage, clearSelectConversation } from '../store/actions/conversationActions'
 import { joinChannel } from '../socket'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 0,
+    position: 'relative',
+  },
+  socketDown: {
+    width: '100%',
+    height: '100%',
+    background: '#00000055',
+    position: 'absolute'
   },
   head: {
     paddingBottom: 8,
@@ -58,7 +65,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function Conversation ({ currentUser, conversation, fetchCurrentMessages, onReceivedMessage, socket }) {
+function Conversation ({
+  currentUser,
+  conversation,
+  fetchCurrentMessages,
+  onReceivedMessage,
+  socket,
+  socketConnected,
+  enqueueSnackbar,
+  clearSelectConversation
+}) {
   let history = useHistory()
   const classes = useStyles()
   const [text, setText] = React.useState('')
@@ -75,10 +91,20 @@ function Conversation ({ currentUser, conversation, fetchCurrentMessages, onRece
       enqueueSnackbar('Erro ao carregar mensagens')
       history.push("/")
     })
-    setChannel(joinChannel(socket, conversation.id, (message) => {
-      onReceivedMessage(message, currentUser)
-    }))
+    return () => {
+      clearSelectConversation()
+    }
   }, [])
+
+  React.useEffect(() => {
+    if (!channel && socketConnected)
+      setChannel(joinChannel(socket, conversation.id, (message) => {
+        onReceivedMessage(message, currentUser)
+      }))
+    return () => {
+      if (channel) channel.leave()
+    }
+  }, [socketConnected])
 
   const trySendMessage = () => {
     if (!channel) {
@@ -98,6 +124,7 @@ function Conversation ({ currentUser, conversation, fetchCurrentMessages, onRece
 
   return (
     <div className={classes.root}>
+      {!socketConnected && <div className={classes.socketDown}></div>}
       <Paper className={classes.paper}>
         <div className={classes.head}>
           <Link to="/">
@@ -132,13 +159,15 @@ const mapStateToProps = state => {
   return {
     currentUser: state.account.user,
     conversation: state.conversation.currentConversation,
-    socket: state.socketConnection.socket
+    socket: state.socketConnection.socket,
+    socketConnected: state.socketConnection.connected,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     onReceivedMessage: (message, user) => dispatch(onReceivedMessage(message, user)),
+    clearSelectConversation: () => dispatch(clearSelectConversation()),
     fetchCurrentMessages: (conversationId, onSuccess, onError) => dispatch(fetchCurrentMessages(conversationId, onSuccess, onError))
   }
 }

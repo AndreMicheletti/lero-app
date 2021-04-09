@@ -22,4 +22,21 @@ export const doLogin = (secretCode, password, onSuccess, onError) => async dispa
   }
 }
 
+export const doAutoLogin = (token, onSuccess, onError) => async dispatch => {
+  dispatch({ type: LOGIN_REQUEST})
+  try {
+    const userResponse = await axios.get('http://localhost:4000/api/user', {
+      headers: { 'Authorization': `Bearer ${token}`}
+    });
+    if (!userResponse.data.success) throw Error("could not fetch user data")
+
+    dispatch({ type: LOGIN_SUCCESS, payload: { token, user: userResponse.data.user } })
+    onSuccess()
+  } catch (e) {
+    console.warn(e)
+    dispatch({ type: LOGIN_FAILURE })
+    onError()
+  }
+}
+
 export const doLogout = () => { return {type: LOGOUT} }

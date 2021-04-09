@@ -34,6 +34,7 @@ import ConversationRouter from './screens/ConversationRouter'
 import LoginScreen from './screens/LoginScreen'
 import NewConversation from './screens/NewConversation'
 import UserStatus from './components/UserStatus'
+import SocketStatus from './components/SocketStatus'
 
 import { doLogout } from './store/actions/accountActions'
 
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignContent: 'center',
+    padding: '0 5px'
   },
   toolbarTitle: {
     display: 'flex',
@@ -87,7 +89,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
   },
   hide: {
     display: 'none',
@@ -143,6 +144,7 @@ function App ({ account, ...props  }) {
               </Link>
             </Typography>
             <div style={{ flex: '1' }} />
+            <SocketStatus />
             <UserStatus />
           </Toolbar>
         </AppBar>

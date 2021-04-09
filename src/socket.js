@@ -10,12 +10,10 @@ export const createAndConnectSocket = () => {
 export const joinChannel = (socket, conversationId, onReceivedMessageCallback) => {
   const channel = socket.channel(`conversation:${conversationId}`);
   channel.join().receive('ok', (responsePayload) => {
-    console.log(responsePayload);
+    console.log('joined conversation', responsePayload);
   });
 
   channel.on("new_message", (response) => {
-    console.log('ON:new_message')
-    console.log(response)
     onReceivedMessageCallback(response.message)
   })
   return channel

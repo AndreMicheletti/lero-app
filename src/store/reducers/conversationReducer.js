@@ -2,6 +2,7 @@ import _ from 'lodash'
 import {
   LOGOUT,
   SELECT_CONVERSATION,
+  CLEAR_SELECT_CONVERSATION,
   FETCH_CONVERSATION_REQUEST,
   FETCH_CONVERSATION_SUCCESS,
   FETCH_CONVERSATION_FAILURE,
@@ -57,6 +58,8 @@ function conversationReducer(state = INITIAL_STATE, action) {
 
     case SELECT_CONVERSATION:
       return {...state, currentConversation: action.payload}
+    case CLEAR_SELECT_CONVERSATION:
+      return {...state, currentConversation: {}}
     case LOGOUT:
       return INITIAL_STATE
     default:
