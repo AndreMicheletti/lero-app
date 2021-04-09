@@ -88,7 +88,7 @@ function Conversation ({
       conversation.id,
       () => {},
       () => {
-      enqueueSnackbar('Erro ao carregar mensagens')
+      enqueueSnackbar('Erro ao carregar mensagens', { variant: 'warning' })
       history.push("/")
     })
     return () => {
@@ -109,11 +109,11 @@ function Conversation ({
   const trySendMessage = (e) => {
     e.preventDefault()
     if (!channel) {
-      enqueueSnackbar('Não conectado ao canal')
+      enqueueSnackbar('Não conectado ao canal', { variant: 'warning' })
       return
     }
     if (!text || text === '') {
-      enqueueSnackbar('Digite a mensagem')
+      enqueueSnackbar('Digite a mensagem', { variant: 'warning' })
       return
     }
     try {

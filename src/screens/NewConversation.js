@@ -34,10 +34,10 @@ function NewConversation ({ account, startConversation, enqueueSnackbar }) {
       startConversation(secretCode, (conversationId) => {
         history.push("/conversations/" + conversationId)
       }, () => {
-        enqueueSnackbar('Não encontrado')
+        enqueueSnackbar('Código secreto não encontrado', { variant: 'info' })
       })
     } else {
-      enqueueSnackbar('Preencha o campo')
+      enqueueSnackbar('Preencha o campo', { variant: 'warning' })
     }
   }
 

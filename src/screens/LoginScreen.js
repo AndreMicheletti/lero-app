@@ -49,12 +49,12 @@ function LoginScreen (props) {
   const tryLogin = (e) => {
     e.preventDefault()
     if (secretCode === '' || password === '') {
-      props.enqueueSnackbar('Preencha os campos')
+      props.enqueueSnackbar('Preencha os campos', { variant: 'warning' })
     } else {
       props.doLogin(secretCode, password, () => {
         props.connectSocket()
       }, () => {
-        props.enqueueSnackbar('Login falhou. Verifique os dados.')
+        props.enqueueSnackbar('Login falhou. Verifique os dados.', { variant: 'error' })
       })
     }
   }
