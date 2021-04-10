@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/lero-app/static/js/main.ed14834f.chunk.js",
-    "main.js.map": "/lero-app/static/js/main.ed14834f.chunk.js.map",
+    "main.js": "/lero-app/static/js/main.9170981c.chunk.js",
+    "main.js.map": "/lero-app/static/js/main.9170981c.chunk.js.map",
     "runtime-main.js": "/lero-app/static/js/runtime-main.2bb31133.js",
     "runtime-main.js.map": "/lero-app/static/js/runtime-main.2bb31133.js.map",
     "static/js/2.bfbe6f5a.chunk.js": "/lero-app/static/js/2.bfbe6f5a.chunk.js",
@@ -12,6 +12,6 @@
   "entrypoints": [
     "static/js/runtime-main.2bb31133.js",
     "static/js/2.bfbe6f5a.chunk.js",
-    "static/js/main.ed14834f.chunk.js"
+    "static/js/main.9170981c.chunk.js"
   ]
 }
