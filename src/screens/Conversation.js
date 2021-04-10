@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Link, useHistory } from "react-router-dom"
 import { withSnackbar } from 'notistack'
 
-import { useParams } from "react-router-dom";
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
@@ -140,11 +140,14 @@ function Conversation ({
           <Avatar />
         </div>
         <Divider />
-        <div className={classes.messages}>
+        <InfiniteScroll
+          className={classes.messages}
+          dataLength={conversation.messages.length}
+        >
           {conversation.messages && conversation.messages.map(message => {
             return (<MessageBubble key={message.id} content={message.content} direction={message.direction} />)
           })}
-        </div>
+        </InfiniteScroll>
         <Divider />
         <form className={classes.inputBar} onSubmit={trySendMessage}>
           <TextField

@@ -22,6 +22,7 @@
     "query-string": "^6.13.6",
     "react": "latest",
     "react-dom": "latest",
+    "react-infinite-scroll-component": "^6.0.0",
     "react-redux": "^7.2.3",
     "react-router-dom": "^5.2.0",
     "react-scripts": "latest",
