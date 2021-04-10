@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignContent: 'center',
-    padding: '0 5px'
+    padding: '3px 15px'
   },
   toolbarTitle: {
     display: 'flex',
@@ -141,13 +141,13 @@ function App ({ account, ...props  }) {
             <Typography variant="h6">
               <Link to="/">
                 <div className={classes.toolbarTitle}>
-                  <span>LeRO</span>
+                  <span>./lero.sh</span>
+                  <SocketStatus />
                 </div>
               </Link>
             </Typography>
             <div style={{ flex: '1' }} />
             <UserStatus />
-            <SocketStatus />
           </Toolbar>
         </AppBar>
 
@@ -169,13 +169,13 @@ function App ({ account, ...props  }) {
           <div className={classes.drawerContainer}>
             <Divider />
             <List>
-              {menuLink("/", "Conversas", <ForumIcon style={{ color: '#fff' }} />)}
+              {menuLink("/", "$conversations", <ForumIcon style={{ color: '#fff' }} />)}
             </List>
             {account.logged && (
               <React.Fragment>
                 <Divider />
                 <List>
-                  {menuLink("/new", "Nova Conversa", <CreateIcon style={{ color: '#fff' }} />)}
+                  {menuLink("/new", "$start_new", <CreateIcon style={{ color: '#fff' }} />)}
                 </List>
                 <List>
                   <ListItem onClick={() => {
@@ -185,7 +185,7 @@ function App ({ account, ...props  }) {
                     <ListItemIcon>
                       <ExitToAppIcon style={{ color: '#fff' }}/>
                     </ListItemIcon>
-                    <ListItemText primary='Sair' />
+                    <ListItemText primary='$logout' />
                   </ListItem>
                 </List>
               </React.Fragment>)

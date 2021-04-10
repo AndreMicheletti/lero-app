@@ -6,8 +6,7 @@ import { withSnackbar } from 'notistack'
 
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import Paper from '@material-ui/core/Paper'
-import Avatar from '@material-ui/core/Avatar'
+import HttpsIcon from '@material-ui/icons/Https'
 import Divider from '@material-ui/core/Divider'
 import TextField from '@material-ui/core/TextField'
 import IconButton from '@material-ui/core/IconButton'
@@ -16,6 +15,7 @@ import SendIcon from '@material-ui/icons/Send'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 
 import MessageBubble from '../components/MessageBubble'
+import TerminalText from '../components/TerminalText'
 
 import { fetchCurrentMessages, onReceivedMessage, clearSelectConversation } from '../store/actions/conversationActions'
 import { joinChannel } from '../socket'
@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: '10px 15px',
-    backgroundColor: '#4f4f4f',
     color: '#fff',
     display: 'grid',
     gridTemplateRows: '55px 10px 55vh 10px 40px'
@@ -88,9 +87,7 @@ function Conversation ({
   React.useEffect(() => {
     fetchCurrentMessages(
       conversation.id,
-      () => {
-        focusInput()
-      },
+      () => {},
       () => {
       enqueueSnackbar('Erro ao carregar mensagens', { variant: 'warning' })
       history.push("/")
@@ -131,27 +128,33 @@ function Conversation ({
   return (
     <div className={classes.root}>
       {!socketConnected && <div className={classes.socketDown}></div>}
-      <Paper className={classes.paper}>
+      <div className={classes.paper}>
         <div className={classes.head}>
           <Link to="/">
             <ArrowBackIcon />
           </Link>
-          <p>{conversation.title}</p>
-          <Avatar />
+          <TerminalText prefix="#/ @">{conversation.title}</TerminalText>
+          <HttpsIcon />
         </div>
         <Divider />
-        <InfiniteScroll
-          className={classes.messages}
-          dataLength={conversation.messages.length}
-        >
-          {conversation.messages && conversation.messages.map(message => {
-            return (<MessageBubble key={message.id} content={message.content} direction={message.direction} />)
-          })}
-        </InfiniteScroll>
+        {socketConnected && conversation && conversation.messages && (
+          <div className={classes.messages}>
+            {conversation.messages && conversation.messages.map(message => {
+              return (
+              <MessageBubble 
+                key={message.id}
+                yourName={currentUser.name}
+                targetName={conversation.title}
+                content={message.content}
+                direction={message.direction}
+                time={message.time}
+              />)
+            })}
+          </div>
+        )}
         <Divider />
-        <form className={classes.inputBar} onSubmit={trySendMessage}>
+        <form className={classes.inputBar} onSubmit={trySendMessage} noValidate autoComplete={'false'}>
           <TextField
-            id="message-text-input"
             autoFocus={true}
             inputRef={inputRef}
             color="primary"
@@ -162,7 +165,7 @@ function Conversation ({
             <SendIcon fontSize="default" style={{ color: '#fff' }} />
           </IconButton>
         </form>
-      </Paper>
+      </div>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#92140C',
+      main: '#7d130c',
     },
     secondary: {
       main: '#FFCF99',
@@ -20,6 +20,9 @@ const theme = createMuiTheme({
       primary: '#FFF8F0',
       secondary: '#e6e6e6'
     },
+  },
+  typography: {
+    fontFamily: "SourceCodePro, RetroGaming, VCRMono, monospace"
   },
 });
 

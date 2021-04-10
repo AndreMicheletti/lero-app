@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from "react-router-dom"
 
+import TerminalText from './TerminalText'
 import Paper from '@material-ui/core/Paper'
 import Avatar from '@material-ui/core/Avatar'
 import { selectConversation } from '../store/actions/conversationActions'
@@ -25,10 +26,7 @@ function ConversationCard ({ id, conversation, selectConversation }) {
 
   return (
     <Link to={`/conversations/${id}`} onClick={() => selectConversation(conversation)}>
-      <Paper className={classes.conversation}>
-        <Avatar />
-        <p>{conversation.title}</p>
-      </Paper>
+      <TerminalText prefix={`<${id}> conversation#/ `}>{conversation.title}</TerminalText>
     </Link>
   )
 }

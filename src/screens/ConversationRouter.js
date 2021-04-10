@@ -19,6 +19,10 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     maxHeight: '100vh'
   },
+  conversations: {
+    display: 'flex',
+    flexDirection: 'column'
+  }
 }))
 
 function ConversationRouter ({ account, conversations, loading, fetchConversations }) {
@@ -51,7 +55,9 @@ function ConversationRouter ({ account, conversations, loading, fetchConversatio
           <Conversation />
         </Route>
         <Route path={match.path}>
-          {renderConversations()}
+          <div className={classes.conversations}>
+            {renderConversations()}
+          </div>
         </Route>
       </Switch>
     </div>

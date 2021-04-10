@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/padlock.svg" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 
     <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
@@ -13,6 +14,21 @@
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
     <style>
+      @font-face{
+        font-family: SourceCodePro;
+        src: url("%PUBLIC_URL%/fonts/sourcecode_pro_medium.ttf"), url("%PUBLIC_URL%/fonts/sourcecode_pro_medium.ttf") format('ttf');
+      }
+      @font-face{
+        font-family: RetroGaming;
+        src: url("%PUBLIC_URL%/fonts/retro_gaming.ttf"), url("%PUBLIC_URL%/fonts/retro_gaming.ttf") format('ttf');
+      }
+      @font-face{
+        font-family: VCRMono;
+        src: url("%PUBLIC_URL%/fonts/vcr_mono.ttf"), url("%PUBLIC_URL%/fonts/vcr_mono.ttf") format('ttf');
+      }
+      * {
+        font-family: SourceCodePro, RetroGaming, VCRMono, monospace;
+      }
       a {
         color: inherit;
         text-decoration: inherit;
