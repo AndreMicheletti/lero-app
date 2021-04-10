@@ -141,7 +141,7 @@ function App ({ account, ...props  }) {
             <Typography variant="h6">
               <Link to="/">
                 <div className={classes.toolbarTitle}>
-                  <span>./lero.sh</span>
+                  <span>Lero</span>
                   <SocketStatus />
                 </div>
               </Link>
@@ -169,13 +169,13 @@ function App ({ account, ...props  }) {
           <div className={classes.drawerContainer}>
             <Divider />
             <List>
-              {menuLink("/", "$conversations", <ForumIcon style={{ color: '#fff' }} />)}
+              {menuLink("/", "/conversations", <ForumIcon style={{ color: '#fff' }} />)}
             </List>
             {account.logged && (
               <React.Fragment>
                 <Divider />
                 <List>
-                  {menuLink("/new", "$start_new", <CreateIcon style={{ color: '#fff' }} />)}
+                  {menuLink("/new", "/start_new", <CreateIcon style={{ color: '#fff' }} />)}
                 </List>
                 <List>
                   <ListItem onClick={() => {
@@ -185,7 +185,7 @@ function App ({ account, ...props  }) {
                     <ListItemIcon>
                       <ExitToAppIcon style={{ color: '#fff' }}/>
                     </ListItemIcon>
-                    <ListItemText primary='$logout' />
+                    <ListItemText primary='/logout' />
                   </ListItem>
                 </List>
               </React.Fragment>)
