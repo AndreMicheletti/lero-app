@@ -85,11 +85,11 @@ function Conversation ({
   const classes = useStyles()
   const [text, setText] = React.useState('')
   const [channel, setChannel] = React.useState(null)
-  const inputRef = useRef(null);
+  const messageInput = useRef(null)
   const handleChange = (event) => {
     setText(event.target.value);
   };
-  const focusInput = () => inputRef.focus()
+  const focusInput = () => messageInput.current.focus()
 
   React.useEffect(() => {
     fetchCurrentMessages(
@@ -177,7 +177,7 @@ function Conversation ({
         <form className={classes.inputBar} onSubmit={trySendMessage} noValidate autoComplete={'false'}>
           <TextField
             autoFocus={true}
-            inputRef={inputRef}
+            inputRef={messageInput}
             color="primary"
             value={text}
             onChange={handleChange}

@@ -19,17 +19,13 @@ export const selectConversation = (conversation) => { return {type: SELECT_CONVE
 export const clearSelectConversation = () => { return {type: CLEAR_SELECT_CONVERSATION } }
 
 export const onReceivedMessage = (payload, user) => {
-  const {message, conversation} = payload
   return {
     type: CONVERSATION_RECEIVED_MESSAGE,
     payload: {
-      message: {
-        id: message.id,
-        content: message.content,
-        time: message.time,
-        direction: message.user_id === user.id ? 'out' : 'in'
-      },
-      conversation
+      id: payload.id,
+      content: payload.content,
+      time: payload.time,
+      direction: payload.user_id === user.id ? 'out' : 'in'
     }
   }
 }
