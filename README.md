@@ -2,9 +2,10 @@
 
 A `React` app to listen to LERO messages
 
-### How to run (development)
+### TODO
 
- - Clone the repo
- - run `npm install`
- - run `npm start`
+ - [] Visual parecido com terminal
+ - [] Mostrar qnt de mensagens novas
+ - [] Enviar imagens
+ - [] Notificação mascarada (atualize agora seus dados cadastrais KKKKKKKKKK)
  
