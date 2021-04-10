@@ -12,9 +12,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const GREEN = "#74a735"
-const ORANGE = "#d0a219"
-const RED = "#d01919"
+const GREEN = "#FFCF99"
+const ORANGE = "#666"
 
 function SocketStatus ({ status }) {
   const classes = useStyles()
@@ -24,7 +23,7 @@ function SocketStatus ({ status }) {
 
   return (
     <div className={classes.root}>
-    <TerminalText color='#FFF' style={{ fontSize: '0.65em', fontWeight: 100 }}> 
+      <TerminalText color='#FFF' style={{ fontSize: '0.65em', fontWeight: 100, paddingRight: 5 }}> 
         status: 
       </TerminalText>
       <TerminalText color={color} style={{ fontSize: '0.65em', fontWeight: 600 }}> 
