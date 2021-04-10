@@ -27,7 +27,7 @@ function UserStatus ({ account }) {
       <div className={classes.root}>
         <div className={classes.userName}>
           <span style={{ fontSize: '1.2em', fontWeight: 500 }}>{account.user.name}</span>
-          <span>{account.user.secret_code}</span>
+          <span>{account.user.secretCode}</span>
         </div>
       </div>
     )

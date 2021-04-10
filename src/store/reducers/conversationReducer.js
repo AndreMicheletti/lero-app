@@ -47,10 +47,13 @@ function conversationReducer(state = INITIAL_STATE, action) {
     case FETCH_CONVERSATION_FAILURE:
       return {...state, conversations: [], loading: false}
 
+    case FETCH_CURRENT_MESSAGES_REQUEST:
+      return {...state, loading: true}
     case FETCH_CURRENT_MESSAGES_SUCCESS:
-      return {...state, currentConversation: {...state.currentConversation, messages: sortMessages(action.payload) }}
+      const { conversation, messages } = action.payload
+      return {...state, loading: false, currentConversation: {...conversation, messages: sortMessages(messages) }}
     case FETCH_CURRENT_MESSAGES_FAILURE:
-      return {...state, currentConversation: {...state.currentConversation, messages: []}}
+      return {...state, loading: false, currentConversation: {...state.currentConversation, messages: []}}
     
     case CONVERSATION_RECEIVED_MESSAGE:
       if (state.currentConversation.id) {

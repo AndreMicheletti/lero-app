@@ -18,14 +18,18 @@ import { BACKEND_URL } from '../../consts'
 export const selectConversation = (conversation) => { return {type: SELECT_CONVERSATION, payload: conversation} }
 export const clearSelectConversation = () => { return {type: CLEAR_SELECT_CONVERSATION } }
 
-export const onReceivedMessage = (message, user) => {
+export const onReceivedMessage = (payload, user) => {
+  const {message, conversation} = payload
   return {
     type: CONVERSATION_RECEIVED_MESSAGE,
     payload: {
-      id: message.id,
-      content: message.content,
-      time: message.time,
-      direction: message.user_id === user.id ? 'out' : 'in'
+      message: {
+        id: message.id,
+        content: message.content,
+        time: message.time,
+        direction: message.user_id === user.id ? 'out' : 'in'
+      },
+      conversation
     }
   }
 }
@@ -78,10 +82,10 @@ export const fetchCurrentMessages = (conversationId, onSuccess, onError) => asyn
 
     const response = await axios.get(BACKEND_URL + `/api/conversations/${conversationId}/messages`,
     { headers: { 'Authorization': `Bearer ${token}`} });
-    const {success, messages} = response.data;
+    const {success} = response.data;
     if (!success) throw response.data
 
-    dispatch({ type: FETCH_CURRENT_MESSAGES_SUCCESS, payload: messages })
+    dispatch({ type: FETCH_CURRENT_MESSAGES_SUCCESS, payload: response.data })
     onSuccess()
   } catch (e) {
     console.warn(e)
