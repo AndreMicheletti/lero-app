@@ -13,6 +13,7 @@ import {
   CONVERSATION_RECEIVED_MESSAGE,
   CLEAR_SELECT_CONVERSATION
 } from '../actionTypes'
+import { BACKEND_URL } from '../../consts'
 
 export const selectConversation = (conversation) => { return {type: SELECT_CONVERSATION, payload: conversation} }
 export const clearSelectConversation = () => { return {type: CLEAR_SELECT_CONVERSATION } }
@@ -34,7 +35,7 @@ export const fetchConversations = () => async dispatch => {
   try {
     const token = localStorage.getItem('auth_token')
 
-    const response = await axios.get('http://localhost:4000/api/conversations', {
+    const response = await axios.get(BACKEND_URL + '/api/conversations', {
       headers: { 'Authorization': `Bearer ${token}`}
     });
     const {success, conversations} = response.data;
@@ -52,7 +53,7 @@ export const startConversation = (secretCode, onSuccess, onError) => async dispa
   try {
     const token = localStorage.getItem('auth_token')
 
-    const response = await axios.post('http://localhost:4000/api/message',
+    const response = await axios.post(BACKEND_URL + '/api/message',
     {
       'content': 'Vamos bater um lero',
       'secret_code': secretCode
@@ -75,7 +76,7 @@ export const fetchCurrentMessages = (conversationId, onSuccess, onError) => asyn
   try {
     const token = localStorage.getItem('auth_token')
 
-    const response = await axios.get(`http://localhost:4000/api/conversations/${conversationId}/messages`,
+    const response = await axios.get(BACKEND_URL + `/api/conversations/${conversationId}/messages`,
     { headers: { 'Authorization': `Bearer ${token}`} });
     const {success, messages} = response.data;
     if (!success) throw response.data

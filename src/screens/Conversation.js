@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link, useHistory } from "react-router-dom"
@@ -79,14 +79,18 @@ function Conversation ({
   const classes = useStyles()
   const [text, setText] = React.useState('')
   const [channel, setChannel] = React.useState(null)
+  const inputRef = useRef(null);
   const handleChange = (event) => {
     setText(event.target.value);
   };
+  const focusInput = () => inputRef.focus()
 
   React.useEffect(() => {
     fetchCurrentMessages(
       conversation.id,
-      () => {},
+      () => {
+        focusInput()
+      },
       () => {
       enqueueSnackbar('Erro ao carregar mensagens', { variant: 'warning' })
       history.push("/")
@@ -120,6 +124,7 @@ function Conversation ({
       channel.push('send_message', {content: text})
     } finally {
       setText('')
+      focusInput()
     }
   }
 
@@ -143,6 +148,9 @@ function Conversation ({
         <Divider />
         <form className={classes.inputBar} onSubmit={trySendMessage}>
           <TextField
+            id="message-text-input"
+            autoFocus={true}
+            inputRef={inputRef}
             color="primary"
             value={text}
             onChange={handleChange}

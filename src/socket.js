@@ -1,8 +1,9 @@
 import { Socket } from 'phoenix';
+import { WEBSOCKET_URL } from './consts'
 
 export const createAndConnectSocket = () => {
   const token = localStorage.getItem('auth_token')
-  const socket = new Socket("ws://localhost:4000/socket", {params: {token: token}})
+  const socket = new Socket(WEBSOCKET_URL, {params: {token: token}})
   socket.connect();
   return socket
 }
