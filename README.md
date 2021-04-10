@@ -8,4 +8,6 @@ A `React` app to listen to LERO messages
  - [] Mostrar qnt de mensagens novas
  - [] Enviar imagens
  - [] Notificação mascarada (atualize agora seus dados cadastrais KKKKKKKKKK)
+ - [] Favoritos
+ - [] Arquivados
  

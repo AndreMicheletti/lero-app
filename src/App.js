@@ -23,8 +23,8 @@ import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 
 import StarIcon from '@material-ui/icons/Star'
-import ForumIcon from '@material-ui/icons/Forum'
 import ArchiveIcon from '@material-ui/icons/Archive'
+import ForumIcon from '@material-ui/icons/Forum'
 import CreateIcon from '@material-ui/icons/Create'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
@@ -170,8 +170,6 @@ function App ({ account, ...props  }) {
             <Divider />
             <List>
               {menuLink("/", "Conversas", <ForumIcon style={{ color: '#fff' }} />)}
-              {menuLink("/favorite", "Favoritos", <StarIcon style={{ color: '#fff' }} />)}
-              {menuLink("/archived", "Arquivados", <ArchiveIcon style={{ color: '#fff' }} />)}
             </List>
             {account.logged && (
               <React.Fragment>
