@@ -1,6 +1,9 @@
 import { Socket } from 'phoenix';
 import { WEBSOCKET_URL } from './consts'
 
+let lobbyChannel;
+let conversationChannel;
+
 export const createAndConnectSocket = () => {
   const token = localStorage.getItem('auth_token')
   const socket = new Socket(WEBSOCKET_URL, {params: {token: token}})
@@ -8,14 +11,20 @@ export const createAndConnectSocket = () => {
   return socket
 }
 
-export const joinChannel = (socket, conversationId, onReceivedMessageCallback) => {
-  const channel = socket.channel(`conversation:${conversationId}`);
-  channel.join().receive('ok', (responsePayload) => {
+export const joinConversation = (socket, conversationId, onReceivedMessageCallback) => {
+  if (conversationChannel) leaveConversation();
+
+  conversationChannel = socket.channel(`conversation:${conversationId}`);
+  conversationChannel.join().receive('ok', (responsePayload) => {
     console.log('joined conversation', responsePayload);
   });
 
-  channel.on("new_message", (response) => {
+  conversationChannel.on("new_message", (response) => {
     onReceivedMessageCallback(response.message)
   })
-  return channel
+}
+
+export const leaveConversation = () => {
+  conversationChannel.leave(500).receive("ok", () => console.log("left channel conversation"));
+  conversationChannel = null;
 }

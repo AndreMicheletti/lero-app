@@ -20,7 +20,7 @@ import MessageBubble from '../components/MessageBubble'
 import TerminalText from '../components/TerminalText'
 
 import { fetchCurrentMessages, onReceivedMessage, clearSelectConversation } from '../store/actions/conversationActions'
-import { joinChannel } from '../socket'
+import { joinConversation, leaveConversation } from '../socket'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,7 +84,7 @@ function Conversation ({
   let history = useHistory()
   const classes = useStyles()
   const [text, setText] = React.useState('')
-  const [channel, setChannel] = React.useState(null)
+  const [channel, setChannel] = React.useState(false)
   const messageInput = useRef(null)
   const handleChange = (event) => {
     setText(event.target.value);
@@ -100,17 +100,22 @@ function Conversation ({
       history.push("/")
     })
     return () => {
+      leaveConversation()
       clearSelectConversation()
     }
   }, [])
 
   React.useEffect(() => {
-    if (!channel && socketConnected)
-      setChannel(joinChannel(socket, conversation.id, (message) => {
-        onReceivedMessage(message, currentUser)
-      }))
-    return () => {
-      if (channel) channel.leave()
+    if (!channel && socketConnected) {
+      try {
+        joinConversation(socket, conversation.id, (message) => {
+          onReceivedMessage(message, currentUser)
+        })
+        setChannel(true)
+      } catch (e) {
+        console.warn(e)
+        setChannel(false)
+      }
     }
   }, [socketConnected])
 

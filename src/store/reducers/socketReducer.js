@@ -20,6 +20,7 @@ function socketReducer(state = INITIAL_STATE, action) {
     case SOCKET_FAILURE:
       return INITIAL_STATE
     case LOGOUT:
+      state.socket.disconnect(() => console.log('socket disconnected'))
       return INITIAL_STATE
     default:
       return state
