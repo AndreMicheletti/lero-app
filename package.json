@@ -2,7 +2,7 @@
   "name": "lero-app",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://andremicheletti.github.io/lero-app",
+  "homepage": "https://andremicheletti.github.io/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
