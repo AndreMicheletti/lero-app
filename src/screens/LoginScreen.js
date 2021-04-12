@@ -61,7 +61,7 @@ function LoginScreen (props) {
 
   return (
     <div className={classes.root}>
-      <form onSubmit={tryLogin}>
+      <form onSubmit={tryLogin} autoComplete="no">
         <Backdrop className={classes.backdrop} open={props.account.loading}>
           <CircularProgress color="inherit" />
         </Backdrop>
@@ -71,6 +71,7 @@ function LoginScreen (props) {
           onChange={handleChangeCode}
           variant="outlined"
           color="secondary"
+          autoComplete="no"
         />
         <div style={{ height: 10 }} />
         <TextField
@@ -80,6 +81,7 @@ function LoginScreen (props) {
           label="Senha"
           variant="outlined"
           color="secondary"
+          autoComplete="new-password"
         />
         <div style={{ height: 15 }} />
         <Button type="submit" variant="contained" color="secondary">
