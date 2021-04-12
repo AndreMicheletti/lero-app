@@ -20,7 +20,7 @@ import MessageBubble from '../components/MessageBubble'
 import TerminalText from '../components/TerminalText'
 
 import { fetchCurrentMessages, onReceivedMessage, clearSelectConversation } from '../store/actions/conversationActions'
-import { joinConversation, leaveConversation } from '../socket'
+import { joinConversation, leaveConversation, sendMessage } from '../socket'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -108,6 +108,7 @@ function Conversation ({
   React.useEffect(() => {
     if (!channel && socketConnected) {
       try {
+        console.log('using effect to JOINCONVERSATION')
         joinConversation(socket, conversation.id, (message) => {
           onReceivedMessage(message, currentUser)
         })
@@ -130,7 +131,7 @@ function Conversation ({
       return
     }
     try {
-      channel.push('send_message', {content: text})
+      sendMessage(text)
     } finally {
       setText('')
       focusInput()

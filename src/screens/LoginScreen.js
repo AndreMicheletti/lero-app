@@ -9,6 +9,7 @@ import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
 import { doLogin, doAutoLogin } from '../store/actions/accountActions'
+import { addConversation, updateConversation } from '../store/actions/conversationActions'
 import { connectSocket } from '../store/actions/socketActions'
 import { useHistory } from 'react-router'
 
@@ -39,8 +40,8 @@ function LoginScreen (props) {
   React.useEffect(() => {
     const token = localStorage.getItem('auth_token');
     if (!!token && token !== '') {
-      props.doAutoLogin(token, () => {
-        props.connectSocket()
+      props.doAutoLogin(token, (user) => {
+        props.connectSocket(user.id, props.addConversation, props.updateConversation)
         history.push("/")
       }, () => {})
     }
@@ -51,8 +52,8 @@ function LoginScreen (props) {
     if (secretCode === '' || password === '') {
       props.enqueueSnackbar('Preencha os campos', { variant: 'warning' })
     } else {
-      props.doLogin(secretCode, password, () => {
-        props.connectSocket()
+      props.doLogin(secretCode, password, (user) => {
+        props.connectSocket(user.id, props.addConversation, props.updateConversation)
       }, () => {
         props.enqueueSnackbar('Login falhou. Verifique os dados.', { variant: 'error' })
       })
@@ -102,7 +103,9 @@ const mapDispatchToProps = dispatch => {
   return {
     doLogin: (secretCode, password, onSuccess, onError) => dispatch(doLogin(secretCode, password, onSuccess, onError)),
     doAutoLogin: (token, onSuccess, onError) => dispatch(doAutoLogin(token, onSuccess, onError)),
-    connectSocket: () => dispatch(connectSocket()),
+    connectSocket: (userId, onNewConversation, onUpdateConversation) => dispatch(connectSocket(userId, onNewConversation, onUpdateConversation)),
+    addConversation: (payload) => dispatch(addConversation(payload)),
+    updateConversation: (payload) => dispatch(updateConversation(payload)),
   }
 }
 

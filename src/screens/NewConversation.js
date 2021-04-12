@@ -6,7 +6,7 @@ import { withSnackbar } from 'notistack'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
 
-import { startConversation } from '../store/actions/conversationActions'
+import { startConversation, selectConversation } from '../store/actions/conversationActions'
 import { useHistory } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-function NewConversation ({ account, startConversation, enqueueSnackbar }) {
+function NewConversation ({ account, startConversation, enqueueSnackbar, selectConversation }) {
   const classes = useStyles()
   const history = useHistory()
   const [secretCode, setText] = React.useState('');
@@ -32,6 +32,7 @@ function NewConversation ({ account, startConversation, enqueueSnackbar }) {
     e.preventDefault();
     if (secretCode && secretCode !== '') {
       startConversation(secretCode, (conversationId) => {
+        selectConversation({ id: conversationId, title: secretCode })
         history.push("/conversations/" + conversationId)
       }, () => {
         enqueueSnackbar('Código secreto não encontrado', { variant: 'info' })
@@ -68,7 +69,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    startConversation: (secretCode, onSuccess, onError) => dispatch(startConversation(secretCode, onSuccess, onError))
+    startConversation: (secretCode, onSuccess, onError) => dispatch(startConversation(secretCode, onSuccess, onError)),
+    selectConversation: (conversation) => dispatch(selectConversation(conversation))
   }
 }
 

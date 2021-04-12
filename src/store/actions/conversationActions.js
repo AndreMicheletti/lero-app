@@ -11,12 +11,19 @@ import {
   FETCH_CURRENT_MESSAGES_SUCCESS,
   FETCH_CURRENT_MESSAGES_FAILURE,
   CONVERSATION_RECEIVED_MESSAGE,
-  CLEAR_SELECT_CONVERSATION
+  CLEAR_SELECT_CONVERSATION,
+  ON_NEW_CONVERSATION,
+  ON_UPD_CONVERSATION,
 } from '../actionTypes'
 import { BACKEND_URL } from '../../consts'
 
 export const selectConversation = (conversation) => { return {type: SELECT_CONVERSATION, payload: conversation} }
+
 export const clearSelectConversation = () => { return {type: CLEAR_SELECT_CONVERSATION } }
+
+export const addConversation = (payload) => { return {type: ON_NEW_CONVERSATION, payload } }
+
+export const updateConversation = (payload) => { return {type: ON_UPD_CONVERSATION, payload } }
 
 export const onReceivedMessage = (payload, user) => {
   return {

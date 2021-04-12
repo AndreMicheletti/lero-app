@@ -3,12 +3,13 @@ import {
   SOCKET_CONNECT,
   SOCKET_FAILURE,
 } from '../actionTypes'
-import { createAndConnectSocket } from '../../socket'
+import { createAndConnectSocket, joinUser } from '../../socket'
 
-export const connectSocket = () => dispatch => {
+export const connectSocket = (userId, onNewConversation, onUpdateConversation) => dispatch => {
   dispatch({ type: SOCKET_REQUEST })
   try {
     const socket = createAndConnectSocket()
+    joinUser(socket, userId, onNewConversation, onUpdateConversation)
     dispatch({ type: SOCKET_CONNECT, payload: socket })
   } catch (e) {
     console.warn(e)

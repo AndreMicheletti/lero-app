@@ -15,7 +15,7 @@ export const doLogin = (secretCode, password, onSuccess, onError) => async dispa
     if (!userResponse.data.success) userResponse;
 
     dispatch({ type: LOGIN_SUCCESS, payload: { token, user: userResponse.data.user } })
-    onSuccess()
+    onSuccess(userResponse.data.user)
   } catch (e) {
     console.warn(e)
     dispatch({ type: LOGIN_FAILURE })
@@ -32,7 +32,7 @@ export const doAutoLogin = (token, onSuccess, onError) => async dispatch => {
     if (!userResponse.data.success) throw Error("could not fetch user data")
 
     dispatch({ type: LOGIN_SUCCESS, payload: { token, user: userResponse.data.user } })
-    onSuccess()
+    onSuccess(userResponse.data.user)
   } catch (e) {
     console.warn(e)
     dispatch({ type: LOGIN_FAILURE })

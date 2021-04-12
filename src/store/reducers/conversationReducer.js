@@ -6,9 +6,8 @@ import {
   FETCH_CONVERSATION_REQUEST,
   FETCH_CONVERSATION_SUCCESS,
   FETCH_CONVERSATION_FAILURE,
-  START_CONVERSATION_REQUEST,
-  START_CONVERSATION_SUCCESS,
-  START_CONVERSATION_FAILURE,
+  ON_NEW_CONVERSATION,
+  ON_UPD_CONVERSATION,
   FETCH_CURRENT_MESSAGES_REQUEST,
   FETCH_CURRENT_MESSAGES_SUCCESS,
   FETCH_CURRENT_MESSAGES_FAILURE,
@@ -54,6 +53,12 @@ function conversationReducer(state = INITIAL_STATE, action) {
       return {...state, loading: false, currentConversation: {...conversation, messages: sortMessages(messages) }}
     case FETCH_CURRENT_MESSAGES_FAILURE:
       return {...state, loading: false, currentConversation: {...state.currentConversation, messages: []}}
+
+    case ON_NEW_CONVERSATION:
+      return {...state, conversations: [...state.conversations, action.payload]}
+    case ON_UPD_CONVERSATION:
+      // TODO implement upd conversation
+      return state
     
     case CONVERSATION_RECEIVED_MESSAGE:
       if (state.currentConversation.id) {
