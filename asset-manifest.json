@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.js": "/static/js/main.bc74596c.chunk.js",
-    "main.js.map": "/static/js/main.bc74596c.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.a3e3ec1e.js",
-    "runtime-main.js.map": "/static/js/runtime-main.a3e3ec1e.js.map",
-    "static/js/2.45d2841d.chunk.js": "/static/js/2.45d2841d.chunk.js",
-    "static/js/2.45d2841d.chunk.js.map": "/static/js/2.45d2841d.chunk.js.map",
-    "index.html": "/index.html",
-    "static/js/2.45d2841d.chunk.js.LICENSE.txt": "/static/js/2.45d2841d.chunk.js.LICENSE.txt"
+    "main.js": "/lero-app/static/js/main.bc74596c.chunk.js",
+    "main.js.map": "/lero-app/static/js/main.bc74596c.chunk.js.map",
+    "runtime-main.js": "/lero-app/static/js/runtime-main.2bb31133.js",
+    "runtime-main.js.map": "/lero-app/static/js/runtime-main.2bb31133.js.map",
+    "static/js/2.45d2841d.chunk.js": "/lero-app/static/js/2.45d2841d.chunk.js",
+    "static/js/2.45d2841d.chunk.js.map": "/lero-app/static/js/2.45d2841d.chunk.js.map",
+    "index.html": "/lero-app/index.html",
+    "static/js/2.45d2841d.chunk.js.LICENSE.txt": "/lero-app/static/js/2.45d2841d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.a3e3ec1e.js",
+    "static/js/runtime-main.2bb31133.js",
     "static/js/2.45d2841d.chunk.js",
     "static/js/main.bc74596c.chunk.js"
   ]
