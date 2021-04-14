@@ -1,5 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
+import { decryptMessage, parseBase64 } from '../crypto'
 
 import TerminalText from './TerminalText'
 
@@ -45,11 +46,12 @@ function MessageBubble ({ yourName, targetName, content, time, direction }) {
   }
   const color = outbound ? '#b55f5f' : '#b58f5f'
   const formattedTime = time.toString().substr(10)
+  const messageText = decryptMessage(parseBase64(localStorage.getItem('auth_token')), JSON.stringify(content))
 
   return (
     <div className={classes.line} style={outbound ? outboundStyle : normalStyle}>
       <div className={classes.bubble}>
-        <TerminalText style={{ fontWeight: 100 }}>{content}</TerminalText>
+        <TerminalText style={{ fontWeight: 100 }}>{messageText}</TerminalText>
       </div>
       <div className={classes.name}>
         <TerminalText color={color} style={{ fontWeight: 500 }}>

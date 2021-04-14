@@ -1,4 +1,5 @@
-import { Socket } from 'phoenix';
+import { Socket } from 'phoenix'
+import { encryptMessage, parseBase64 } from './crypto'
 import { WEBSOCKET_URL } from './consts'
 
 let userChannel;
@@ -26,7 +27,8 @@ export const joinConversation = (socket, conversationId, onReceivedMessageCallba
 
 export const sendMessage = (text) => {
   if (!conversationChannel) console.warn('tried to send message disconnected from conversationChannel (sendMessage)');
-  conversationChannel.push("send_message", {content: text})
+  const contentPayload = encryptMessage(parseBase64(localStorage.getItem('auth_token')), text)
+  conversationChannel.push("send_message", contentPayload)
 }
 
 export const leaveConversation = () => {
