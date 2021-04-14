@@ -27,6 +27,7 @@ function ConversationCard ({ id, conversation, selectConversation }) {
   return (
     <Link to={`/conversations/${id}`} onClick={() => selectConversation(conversation)}>
       <TerminalText prefix={`<${id}> conversation#/ `}>{conversation.title}</TerminalText>
+      {conversation.updated && (<TerminalText prefix=' ' color="red">{'<!!>'}</TerminalText>)}
     </Link>
   )
 }

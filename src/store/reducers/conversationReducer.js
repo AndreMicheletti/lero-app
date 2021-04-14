@@ -57,8 +57,7 @@ function conversationReducer(state = INITIAL_STATE, action) {
     case ON_NEW_CONVERSATION:
       return {...state, conversations: [...state.conversations, action.payload]}
     case ON_UPD_CONVERSATION:
-      // TODO implement upd conversation
-      return state
+      return {...state, conversations: onUpdateConversation(state, action.payload)}
     
     case CONVERSATION_RECEIVED_MESSAGE:
       if (state.currentConversation.id) {
@@ -69,7 +68,7 @@ function conversationReducer(state = INITIAL_STATE, action) {
       }
 
     case SELECT_CONVERSATION:
-      return {...state, currentConversation: action.payload}
+      return {...state, conversations: clearUpdatedOnConversation(state, action.payload.id), currentConversation: action.payload}
     case CLEAR_SELECT_CONVERSATION:
       return {...state, currentConversation: {}}
     case LOGOUT:
@@ -81,6 +80,23 @@ function conversationReducer(state = INITIAL_STATE, action) {
 
 function sortMessages (messages) {
   return _.orderBy(messages, 'time', 'desc')
+}
+
+function clearUpdatedOnConversation (state, convsId) {
+  return state.conversations.map(convs => {
+    if (convs.id !== convsId) return convs;
+    return {...convs, updated: false}
+  })
+}
+
+function onUpdateConversation (state, conversation) {
+  return state.conversations.map(convs => {
+    if (convs.id === conversation.id && state.currentConversation.id != conversation.id) {
+      return { ...conversation, updated: true }
+    } else {
+      return convs
+    }
+  })
 }
 
 export default conversationReducer
