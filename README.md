@@ -7,6 +7,7 @@ A `React` app to listen to LERO messages
  - [x] Visual parecido com terminal
  - [x] Criar channel 'lobby' para receber broadcast de nova conversa
  - [x] Mostrar heads-up para mensagens novas em uma conversa
+ - [ ] Criar criptografia / medidas de segurança na troca de msgs
  - [ ] Criar página "about" com links para os repos
  - [ ] Mostrar somente mensagens da sessão atual - e comando para carregar mensagens antigas
  - [ ] Criar "system_messages" para qnd a pessoa sai e entra da conversa
