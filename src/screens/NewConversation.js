@@ -35,10 +35,10 @@ function NewConversation ({ account, startConversation, enqueueSnackbar, selectC
         selectConversation({ id: conversationId, title: secretCode })
         history.push("/conversations/" + conversationId)
       }, () => {
-        enqueueSnackbar('Código secreto não encontrado', { variant: 'info' })
+        enqueueSnackbar('Secret code not found. Want help?', { variant: 'info' })
       })
     } else {
-      enqueueSnackbar('Preencha o campo', { variant: 'warning' })
+      enqueueSnackbar('Well, ghosts don\'t exist... or do they?', { variant: 'warning' })
     }
   }
 

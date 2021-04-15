@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Chip from '@material-ui/core/Chip'
@@ -89,7 +90,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function AboutScreen (props) {
+function AboutScreen ({ account }) {
   const classes = useStyles()
   const [original, setToogle] = React.useState(true)
 
@@ -191,14 +192,23 @@ function AboutScreen (props) {
           className={classes.chip}
           color="secondary"
           variant="outlined"
-          label={"english option"}
+          label={"language selector"}
           avatar={<TodoIcon style={{ color: '#FFCF99', backgroundColor: 'transparent' }} />}
         />
       </div>
-      <h3>Want an account?</h3>
-      <MouseoverText override={!original} reverse={true} overChildren={(<span>you can't just simply <b>lero</b></span>)}>
-        você não pode simplesmente <b>lero</b>
+      <MouseoverText override={!original} overChildren={(<h3>Want a account?</h3>)}>
+        <h3>Quer uma conta?</h3>
       </MouseoverText>
+      {!account.logged && (
+        <MouseoverText override={!original} reverse={true} overChildren={(<span>you can't just simply type <b>lero</b></span>)}>
+          você não pode simplesmente digitar <b>lero</b>
+        </MouseoverText>
+      )}
+      {account.logged && (
+        <span>
+          {original ? `você já tem uma, ${account.user.secretCode}` : `you already got one, ${account.user.secretCode}`}
+        </span>
+      )}
       <h3>Repos</h3>
       <div className={classes.features}>
         <a href="https://github.com/AndreMicheletti/lero-app" target="_blank">
@@ -242,4 +252,10 @@ function AboutScreen (props) {
   )
 }
 
-export default AboutScreen
+const mapStateToProps = (state) => {
+  return {
+    account: state.account
+  }
+}
+
+export default connect(mapStateToProps)(AboutScreen)

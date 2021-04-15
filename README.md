@@ -9,8 +9,8 @@ A `React` app to listen to LERO messages
  - [x] Mostrar heads-up para mensagens novas em uma conversa
  - [x] Criptografia AES no tráfego das mensagens (simples)
  - [ ] End-to-end encryption com chaves RSA
- - [ ] Criar página "about" com links para os repos
- - [ ] Criar página de "register
+ - [x] Criar página "about" com links para os repos
+ - [x] Criar página de "register
  - [ ] Mostrar somente mensagens da sessão atual - e comando para carregar mensagens antigas
  - [ ] Criar "system_messages" para qnd a pessoa sai e entra da conversa
  - [ ] Enviar imagens

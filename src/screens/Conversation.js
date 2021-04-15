@@ -96,7 +96,7 @@ function Conversation ({
       conversation.id,
       () => {},
       () => {
-      enqueueSnackbar('Erro ao carregar mensagens', { variant: 'warning' })
+      enqueueSnackbar('Failed loading messages', { variant: 'warning' })
       history.push("/")
     })
     return () => {
@@ -123,11 +123,11 @@ function Conversation ({
   const trySendMessage = (e) => {
     e.preventDefault()
     if (!channel) {
-      enqueueSnackbar('Não conectado ao canal', { variant: 'warning' })
+      enqueueSnackbar('Not connected to channel', { variant: 'warning' })
       return
     }
     if (!text || text === '') {
-      enqueueSnackbar('Digite a mensagem', { variant: 'warning' })
+      enqueueSnackbar('Speak your mind or get out', { variant: 'warning' })
       return
     }
     try {
