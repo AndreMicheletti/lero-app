@@ -4,5 +4,5 @@ git fetch
 git checkout gh-pages
 git remote update
 git fetch
-git push -f github gh-pages
+git push -f pages gh-pages
 git checkout master

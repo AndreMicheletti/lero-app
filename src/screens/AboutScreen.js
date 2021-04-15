@@ -129,14 +129,13 @@ function AboutScreen ({ account }) {
           It is a webchat built with <Code><img className={classes.img} src={elixirLogo} height="20"/>Phoenix</Code> and <Code><img className={classes.img} src={reactLogo} height="20"/>React</Code> that encrypts its
           messages during transport. It's quite simple, not intended to be the 
           <b> most advanced, unhackable, top-tier explosive web messaging security solution</b>, 
-          but you can have some fun using it.
+          but at least no one knows it exists.
         </p>
       )}>
         <p>
           É um webchat feito usando <Code><img className={classes.img} src={elixirLogo} height="20"/>Phoenix</Code> e <Code><img className={classes.img} src={reactLogo} height="20"/>React</Code> que encripta
           suas mensagens em trânsito. É bem simples e não pretende ser
-          <b> a solução pica, top de linha, destruidora de segurança de mensagens</b>, 
-          mas você pode brincar e se divertir um pouco.
+          <b> a solução pica, top de linha, destruidora de segurança de mensagens</b>, mas pelo menos ninguém sabe que existe.
         </p>
       </MouseoverText>
       <MouseoverText
@@ -200,8 +199,8 @@ function AboutScreen ({ account }) {
         <h3>Quer uma conta?</h3>
       </MouseoverText>
       {!account.logged && (
-        <MouseoverText override={!original} reverse={true} overChildren={(<span>you can't just simply type <b>lero</b></span>)}>
-          você não pode simplesmente digitar <b>lero</b>
+        <MouseoverText override={!original} reverse={true} overChildren={(<span>you can't type <b>lero</b></span>)}>
+          você não pode digitar <b>lero</b>
         </MouseoverText>
       )}
       {account.logged && (
