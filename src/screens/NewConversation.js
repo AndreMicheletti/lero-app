@@ -46,7 +46,7 @@ function NewConversation ({ account, startConversation, enqueueSnackbar, selectC
     <div className={classes.root}>
       <form onSubmit={tryStartConversation}>
         <TextField
-          label="Código secreto"
+          label="Secret Code"
           color="secondary"
           value={secretCode}
           onChange={handleChange}
@@ -54,7 +54,7 @@ function NewConversation ({ account, startConversation, enqueueSnackbar, selectC
         />
         <div style={{ height: 15 }} />
         <Button type="submit" variant="contained" color="secondary">
-          Iniciar Conversa
+          SEARCH
         </Button>
       </form>
     </div>

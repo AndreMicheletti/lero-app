@@ -22,8 +22,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 
-import StarIcon from '@material-ui/icons/Star'
-import ArchiveIcon from '@material-ui/icons/Archive'
+import InfoIcon from '@material-ui/icons/Info'
 import ForumIcon from '@material-ui/icons/Forum'
 import CreateIcon from '@material-ui/icons/Create'
 import MenuIcon from '@material-ui/icons/Menu'
@@ -37,6 +36,7 @@ import UserStatus from './components/UserStatus'
 import SocketStatus from './components/SocketStatus'
 
 import { doLogout } from './store/actions/accountActions'
+import AboutScreen from './screens/AboutScreen';
 
 const drawerWidth = 240;
 
@@ -101,8 +101,7 @@ function App ({ account, ...props  }) {
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
-    if (account.logged)
-      setOpen(true);
+    setOpen(true);
   };
 
   const handleDrawerClose = () => {
@@ -127,17 +126,15 @@ function App ({ account, ...props  }) {
 
         <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.appToolbar}>
-            {account.logged && (
-              <IconButton
-                color="inherit"
-                aria-label="open drawer"
-                onClick={handleDrawerOpen}
-                edge="start"
-                className={classes.menuButton}
-              >
-                <MenuIcon />
-              </IconButton>
-            )}
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={classes.menuButton}
+            >
+              <MenuIcon />
+            </IconButton>
             <Typography variant="h6">
               <Link to="/">
                 <div className={classes.toolbarTitle}>
@@ -167,14 +164,11 @@ function App ({ account, ...props  }) {
             </IconButton>
           </div>
           <div className={classes.drawerContainer}>
-            <Divider />
-            <List>
-              {menuLink("/", "/conversations", <ForumIcon style={{ color: '#fff' }} />)}
-            </List>
             {account.logged && (
               <React.Fragment>
                 <Divider />
                 <List>
+                  {menuLink("/", "/conversations", <ForumIcon style={{ color: '#fff' }} />)}
                   {menuLink("/new", "/start_new", <CreateIcon style={{ color: '#fff' }} />)}
                 </List>
                 <List>
@@ -190,14 +184,18 @@ function App ({ account, ...props  }) {
                 </List>
               </React.Fragment>)
             }
+            <Divider />
+            <List>
+              {menuLink("/about", "/about", <InfoIcon style={{ color: '#fff' }} />)}
+            </List>
           </div>
         </SwipeableDrawer>
         {<main>
           <Container component="main" className={classes.main} maxWidth="md">
             {account.logged 
             ? (<Switch>
-                <Route path="/favorite">
-                  <p>Favorite</p>
+                <Route path="/about">
+                  <AboutScreen />
                 </Route>
                 <Route path="/archived">
                   <p>Archived</p>
@@ -208,9 +206,16 @@ function App ({ account, ...props  }) {
                 <Route path="/">
                   <ConversationRouter />
                 </Route>
-              </Switch>)
-            : (
-              <LoginScreen />
+              </Switch>
+            ) : (
+              <Switch>
+                <Route path="/about">
+                  <AboutScreen />
+                </Route>
+                <Route path="/">
+                  <LoginScreen />
+                </Route>
+              </Switch>
             )}
           </Container>
         </main>}

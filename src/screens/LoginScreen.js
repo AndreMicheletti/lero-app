@@ -67,7 +67,7 @@ function LoginScreen (props) {
           <CircularProgress color="inherit" />
         </Backdrop>
         <TextField
-          label="Código secreto"
+          label="Secret code"
           value={secretCode}
           onChange={handleChangeCode}
           variant="outlined"
@@ -79,7 +79,7 @@ function LoginScreen (props) {
           type="password"
           value={password}
           onChange={handleChangePass}
-          label="Senha"
+          label="Pass"
           variant="outlined"
           color="secondary"
           autoComplete="new-password"

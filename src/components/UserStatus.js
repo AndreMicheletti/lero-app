@@ -2,7 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 
+import { Link } from "react-router-dom"
 import Button from '@material-ui/core/Button'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,11 +36,12 @@ function UserStatus ({ account }) {
   }
 
   return (
-    <Button color="inherit" className={classes.button}>
-      Login
-    </Button>
+    <Link to="/">
+      <Button color="inherit" className={classes.button}>
+        Login
+      </Button>
+    </Link>
   )
-  
 }
 
 const mapStateToProps = state => {
