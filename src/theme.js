@@ -1,24 +1,33 @@
 import { red } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
+export const GREEN_100 = "#112d00"
+export const GREEN_900 = "#00ff2d"
+export const GREEN_BLUE_900 = "#00ff97"
+export const GREEN_BLUE_100 = "#183319"
+
 // A custom theme for this app
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#7d130c',
+      main: GREEN_900,
     },
     secondary: {
-      main: '#FFCF99',
+      main: GREEN_900,
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: '#1E1E24',
+      default: '#000000',
+      paper: '#121512',
+      green: GREEN_100
     },
     text: {
-      primary: '#FFF8F0',
-      secondary: '#e6e6e6'
+      primary: GREEN_BLUE_900,
+      secondary: GREEN_900,
+      icon: GREEN_900,
+      white: "#fff"
     },
   },
   typography: {

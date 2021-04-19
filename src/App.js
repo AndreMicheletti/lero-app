@@ -8,7 +8,7 @@ import {
   Switch,
   Route,
   Link,
-} from "react-router-dom";
+} from "react-router-dom"
 
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -36,7 +36,9 @@ import UserStatus from './components/UserStatus'
 import SocketStatus from './components/SocketStatus'
 
 import { doLogout } from './store/actions/accountActions'
-import AboutScreen from './screens/AboutScreen';
+import AboutScreen from './screens/AboutScreen'
+
+import { GREEN_900 } from './theme'
 
 const drawerWidth = 240;
 
@@ -52,6 +54,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: theme.palette.background.green,
+    color: theme.palette.text.secondary
   },
   appToolbar: {
     display: 'flex',
@@ -70,8 +74,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: '#333',
-    color: '#fff'
+    backgroundColor: theme.palette.primary.default,
+    color: theme.palette.text.white,
   },
   drawerContainer: {
     overflow: 'auto',
@@ -160,7 +164,7 @@ function App ({ account, ...props  }) {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={handleDrawerClose}>
-              <ChevronLeftIcon style={{ color: 'white' }} />
+              <ChevronLeftIcon style={{ color: GREEN_900 }} />
             </IconButton>
           </div>
           <div className={classes.drawerContainer}>
@@ -168,8 +172,8 @@ function App ({ account, ...props  }) {
               <React.Fragment>
                 <Divider />
                 <List>
-                  {menuLink("/", "/conversations", <ForumIcon style={{ color: '#fff' }} />)}
-                  {menuLink("/new", "/start_new", <CreateIcon style={{ color: '#fff' }} />)}
+                  {menuLink("/", "/conversations", <ForumIcon style={{ color: GREEN_900 }} />)}
+                  {menuLink("/new", "/start_new", <CreateIcon style={{ color: GREEN_900 }} />)}
                 </List>
                 <List>
                   <ListItem onClick={() => {
@@ -177,7 +181,7 @@ function App ({ account, ...props  }) {
                     handleDrawerClose()
                   }} button key='logout'>
                     <ListItemIcon>
-                      <ExitToAppIcon style={{ color: '#fff' }}/>
+                      <ExitToAppIcon style={{ color: GREEN_900 }}/>
                     </ListItemIcon>
                     <ListItemText primary='/logout' />
                   </ListItem>
@@ -186,7 +190,7 @@ function App ({ account, ...props  }) {
             }
             <Divider />
             <List>
-              {menuLink("/about", "/about", <InfoIcon style={{ color: '#fff' }} />)}
+              {menuLink("/about", "/about", <InfoIcon style={{ color: GREEN_900 }} />)}
             </List>
           </div>
         </SwipeableDrawer>

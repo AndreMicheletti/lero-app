@@ -30,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const COLOR1 = '#5fb596'
+const COLOR2 = '#84b55f'
+
 function MessageBubble ({ yourName, targetName, content, time, direction }) {
   const classes = useStyles()
   const outbound = direction === 'out'
@@ -44,7 +47,7 @@ function MessageBubble ({ yourName, targetName, content, time, direction }) {
     gridTemplateColumns: 'auto minmax(min-content, 100%) auto',
     textAlign: 'right'
   }
-  const color = outbound ? '#b55f5f' : '#b58f5f'
+  const color = outbound ? COLOR1 : COLOR2
   const formattedTime = time.toString().substr(10)
   const messageText = decryptMessage(parseBase64(localStorage.getItem('auth_token')), JSON.stringify(content))
 
