@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const YOU = PRIMARY
-const HIM = SECONDARY
+const HIM = '#f700cc'
 
 function MessageBubble ({ yourName, targetName, content, time, direction }) {
   const classes = useStyles()

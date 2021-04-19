@@ -10,6 +10,8 @@ import {
   Link,
 } from "react-router-dom"
 
+import owlIcon from './assets/owl.png'
+
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Container from '@material-ui/core/Container'
@@ -64,9 +66,24 @@ const useStyles = makeStyles((theme) => ({
     alignContent: 'center',
     padding: '3px 15px'
   },
+  toolbarWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+  },
+  logo: {
+    width: 50,
+    height: 50,
+    margin: 'auto 10px'
+  },
   toolbarTitle: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+  },
+  appTitle: {
+    fontFamily: 'Aero',
+    color: '#ff21c5',
+    fontSize: '1.5em',
+    marginBottom: '-10px'
   },
   drawer: {
     width: drawerWidth,
@@ -141,9 +158,12 @@ function App ({ account, ...props  }) {
             </IconButton>
             <Typography variant="h6">
               <Link to="/">
-                <div className={classes.toolbarTitle}>
-                  <span>Lero</span>
-                  <SocketStatus />
+                <div className={classes.toolbarWrapper}>
+                  <img src={owlIcon} className={classes.logo} />
+                  <div className={classes.toolbarTitle}>
+                    <span className={classes.appTitle}>Lero</span>
+                    <SocketStatus />
+                  </div>
                 </div>
               </Link>
             </Typography>
