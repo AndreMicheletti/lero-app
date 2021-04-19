@@ -1,11 +1,14 @@
-import { red } from '@material-ui/core/colors';
+import { red, green } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-export const PRIMARY = "#fb5b5a"
-export const PRIMARY_BACKGROUND = "#461919"
+export const PRIMARY = "#00f5f7"
+export const PRIMARY_BACKGROUND = "#001925"
 
-export const SECONDARY = "#00f5f7"
-export const SECONDARY_BACKGROUND = "#001925"
+export const SECONDARY = "#f7c300"
+export const SECONDARY_BACKGROUND = "#796000"
+
+export const CONNECTED = 'green'
+export const ERROR = 'red'
 
 export const WHITE = "#FFF"
 export const BLACK = "#000"
@@ -26,14 +29,14 @@ const theme = createMuiTheme({
       main: red.A400,
     },
     background: {
-      default: SECONDARY_BACKGROUND,
-      paper: SECONDARY_BACKGROUND,
+      default: '#111315',
+      paper: BLACK,
       primary: PRIMARY_BACKGROUND
     },
     text: {
       primary: PRIMARY,
       secondary: PRIMARY,
-      accent: SECONDARY,
+      accent: PRIMARY,
       icon: PRIMARY,
       white: WHITE
     },

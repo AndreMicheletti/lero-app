@@ -194,7 +194,8 @@ function App ({ account, ...props  }) {
             </List>
           </div>
         </SwipeableDrawer>
-        {<main>
+
+        <main>
           <Container component="main" className={classes.main} maxWidth="md">
             {account.logged 
             ? (<Switch>
@@ -222,7 +223,7 @@ function App ({ account, ...props  }) {
               </Switch>
             )}
           </Container>
-        </main>}
+        </main>
 
       </div>
     </Router>
