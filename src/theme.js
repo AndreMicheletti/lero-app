@@ -42,15 +42,8 @@ const theme = createMuiTheme({
     fontFamily: "SourceCodePro, RetroGaming, VCRMono, monospace"
   },
   overrides: {
-    MuiInput: {
-      'underline:hover': {
-        borderBottom: `2px solid ${SECONDARY}`
-      }
-    },
     MuiInputBase: {
-      // Nome da regra
       input: {
-        // Algum CSS
         color: WHITE,
       },
     },
