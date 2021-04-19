@@ -15,6 +15,7 @@ import reactLogo from '../assets/react_logo.svg'
 import githubLogo from '../assets/github_logo.png'
 
 import MouseoverText from '../components/MouseoverText'
+import { SECONDARY } from '../theme'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 8,
     fontFamily: 'VCRMono',
     fontSize: '18px',
+    color: SECONDARY
   },
   footer: {
     paddingTop: 30,
@@ -67,6 +69,14 @@ const useStyles = makeStyles((theme) => ({
     borderColor: '#4ada4a',
     color: '#4ada4a'
   },
+  todoChip: {
+    width: 'min-content',
+    fontSize: '1.1em',
+    marginRight: 4,
+    marginBottom: 6,
+    borderColor: '#777',
+    color: '#777'
+  },
   githubChip: {
     width: 'min-content',
     fontSize: '1.1em',
@@ -89,6 +99,13 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: -4
   }
 }))
+
+const todoChip = {
+  outlinedSecondary: {
+    color: '#FFF',
+    borderColor: '#777'
+  }
+}
 
 function AboutScreen ({ account }) {
   const classes = useStyles()
@@ -153,46 +170,46 @@ function AboutScreen ({ account }) {
           avatar={<DoneIcon style={{ color: '#4ada4a', backgroundColor: 'transparent' }} />}
         />
         <Chip
-          className={classes.chip}
+          className={classes.todoChip}
           color="secondary"
           variant="outlined"
           label={"self-destructing messages"}
-          avatar={<TodoIcon style={{ color: '#FFCF99', backgroundColor: 'transparent' }} />}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
         <Chip
-          className={classes.chip}
+          className={classes.todoChip}
           color="secondary"
           variant="outlined"
           label={"encrypted images"}
-          avatar={<TodoIcon style={{ color: '#FFCF99', backgroundColor: 'transparent' }} />}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
         <Chip
-          className={classes.chip}
+          className={classes.todoChip}
           color="secondary"
           variant="outlined"
           label={"group chats"}
-          avatar={<TodoIcon style={{ color: '#FFCF99', backgroundColor: 'transparent' }} />}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
         <Chip
-          className={classes.chip}
+          className={classes.todoChip}
           color="secondary"
           variant="outlined"
           label={"notifications"}
-          avatar={<TodoIcon style={{ color: '#FFCF99', backgroundColor: 'transparent' }} />}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
         <Chip
-          className={classes.chip}
+          className={classes.todoChip}
           color="secondary"
           variant="outlined"
           label={"cool animations"}
-          avatar={<TodoIcon style={{ color: '#FFCF99', backgroundColor: 'transparent' }} />}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
         <Chip
-          className={classes.chip}
-          color="secondary"
+          className={classes.todoChip}
+          color="primary"
           variant="outlined"
           label={"language selector"}
-          avatar={<TodoIcon style={{ color: '#FFCF99', backgroundColor: 'transparent' }} />}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
       </div>
       <MouseoverText override={!original} overChildren={(<h3>Want a account?</h3>)}>

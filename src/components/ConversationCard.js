@@ -4,8 +4,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Link } from "react-router-dom"
 
 import TerminalText from './TerminalText'
-import Paper from '@material-ui/core/Paper'
-import Avatar from '@material-ui/core/Avatar'
 import { selectConversation } from '../store/actions/conversationActions'
 
 const useStyles = makeStyles((theme) => ({
@@ -17,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     gridColumnGap: 15,
     alignItems: 'center',
     backgroundColor: '#4f4f4f',
-    color: '#fff'
+    color: theme.palette.text.accent
   }
 }))
 

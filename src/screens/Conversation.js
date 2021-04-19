@@ -6,7 +6,7 @@ import { withSnackbar } from 'notistack'
 
 import Backdrop from '@material-ui/core/Backdrop'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import InfiniteScroll from 'react-infinite-scroll-component'
+// import InfiniteScroll from 'react-infinite-scroll-component'
 
 import HttpsIcon from '@material-ui/icons/Https'
 import Divider from '@material-ui/core/Divider'
@@ -21,6 +21,7 @@ import TerminalText from '../components/TerminalText'
 
 import { fetchCurrentMessages, onReceivedMessage, clearSelectConversation } from '../store/actions/conversationActions'
 import { joinConversation, leaveConversation, sendMessage } from '../socket'
+import { PRIMARY, SECONDARY } from '../theme'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -170,10 +171,10 @@ function Conversation ({
       <div className={classes.paper}>
         <div className={classes.head}>
           <Link to="/">
-            <ArrowBackIcon />
+            <ArrowBackIcon style={{ color: PRIMARY }} />
           </Link>
-          <TerminalText prefix="#/ @">{conversation.title}</TerminalText>
-          <HttpsIcon />
+          <TerminalText color={PRIMARY} prefix="#/ @">{conversation.title}</TerminalText>
+          <HttpsIcon style={{ color: PRIMARY }} />
         </div>
         <Divider />
         <div className={classes.messages}>
@@ -184,12 +185,11 @@ function Conversation ({
           <TextField
             autoFocus={true}
             inputRef={messageInput}
-            color="primary"
             value={text}
             onChange={handleChange}
           />
           <IconButton aria-label="delete" className={classes.margin} size="small" type="submit">
-            <SendIcon fontSize="default" style={{ color: '#fff' }} />
+            <SendIcon fontSize="default" style={{ color: PRIMARY }} />
           </IconButton>
         </form>
       </div>

@@ -1,37 +1,59 @@
 import { red } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-export const GREEN_100 = "#112d00"
-export const GREEN_900 = "#00ff2d"
-export const GREEN_BLUE_900 = "#00ff97"
-export const GREEN_BLUE_100 = "#183319"
+export const PRIMARY = "#fb5b5a"
+export const PRIMARY_BACKGROUND = "#461919"
+
+export const SECONDARY = "#00f5f7"
+export const SECONDARY_BACKGROUND = "#001925"
+
+export const WHITE = "#FFF"
+export const BLACK = "#000"
 
 // A custom theme for this app
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: GREEN_900,
+      main: PRIMARY,
     },
     secondary: {
-      main: GREEN_900,
+      main: PRIMARY,
+    },
+    accent: {
+      main: SECONDARY
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: '#000000',
-      paper: '#121512',
-      green: GREEN_100
+      default: SECONDARY_BACKGROUND,
+      paper: SECONDARY_BACKGROUND,
+      primary: PRIMARY_BACKGROUND
     },
     text: {
-      primary: GREEN_BLUE_900,
-      secondary: GREEN_900,
-      icon: GREEN_900,
-      white: "#fff"
+      primary: PRIMARY,
+      secondary: PRIMARY,
+      accent: SECONDARY,
+      icon: PRIMARY,
+      white: WHITE
     },
   },
   typography: {
     fontFamily: "SourceCodePro, RetroGaming, VCRMono, monospace"
+  },
+  overrides: {
+    MuiInput: {
+      'underline:hover': {
+        borderBottom: `2px solid ${SECONDARY}`
+      }
+    },
+    MuiInputBase: {
+      // Nome da regra
+      input: {
+        // Algum CSS
+        color: WHITE,
+      },
+    },
   },
 });
 
