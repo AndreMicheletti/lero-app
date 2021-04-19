@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 
 import TerminalText from './TerminalText'
+import { CONNECTED, ERROR } from '../theme'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,8 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const GREEN = "#FFCF99"
-const ORANGE = "#666"
+const GREEN = CONNECTED
+const ORANGE = ERROR
 
 function SocketStatus ({ status }) {
   const classes = useStyles()

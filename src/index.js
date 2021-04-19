@@ -9,6 +9,7 @@ import theme from './theme';
 import { Provider } from 'react-redux'
 
 import configureStore from './store'
+import particleConfig from './assets/particles.json'
 
 const store = configureStore();
 
@@ -27,6 +28,11 @@ export const registerServiceWorker = () => {
 }
 
 registerServiceWorker()
+
+console.log(particleConfig)
+particlesJS('particles-js', particleConfig, function() {
+  console.log('callback - particles.js config loaded');
+});
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>

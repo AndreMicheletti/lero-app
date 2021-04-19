@@ -2,9 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="shortcut icon" href="%PUBLIC_URL%/padlock.svg" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/cpu.svg" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="%PUBLIC_URL%/js/particles.js"></script>
 
     <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
     <meta name="theme-color" content="#000000" />
@@ -30,6 +31,9 @@
         font-family: Cipher;
         src: url("%PUBLIC_URL%/fonts/PigpenCipher.otf"), url("%PUBLIC_URL%/fonts/PigpenCipher.otf") format('otf');
       }
+      /* body {
+        background-image: url("%PUBLIC_URL%/background2.jpg");
+      } */
       * {
         font-family: SourceCodePro, RetroGaming, VCRMono, monospace;
       }
@@ -58,6 +62,17 @@
       *::-webkit-scrollbar-thumb:hover {
         background: #ffffffaa; 
       }
+      #root {
+        z-index: 10000;
+      }
+      #particles-js {
+        z-index: -100000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
     </style>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
@@ -74,6 +89,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="particles-js"></div>
     <div id="root"></div>
     <!--
       This HTML file is a template.

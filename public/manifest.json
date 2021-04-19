@@ -3,7 +3,7 @@
   "name": "Lero Application",
   "icons": [
     {
-      "src": "padlock.svg",
+      "src": "cpu.svg",
       "sizes": "150x150",
       "type": "image/x-icon"
     }
