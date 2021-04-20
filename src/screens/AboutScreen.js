@@ -126,6 +126,18 @@ function AboutScreen ({ account }) {
         <Chip
           className={classes.todoChip}
           variant="outlined"
+          label={"metal gear-like stuff"}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
+        />
+        <Chip
+          className={classes.todoChip}
+          variant="outlined"
+          label={"ghost-in-the-shell stuff"}
+          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
+        />
+        <Chip
+          className={classes.todoChip}
+          variant="outlined"
           label={"encrypted images"}
           avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
