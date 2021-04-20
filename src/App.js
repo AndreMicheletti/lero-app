@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: theme.palette.background.primary,
-    color: theme.palette.text.primary
+    backgroundColor: theme.palette.background.accent,
+    color: theme.palette.text.accent
   },
   appToolbar: {
     display: 'flex',

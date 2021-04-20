@@ -7,6 +7,9 @@ export const PRIMARY_BACKGROUND = "#001925"
 export const SECONDARY = "#f7c300"
 export const SECONDARY_BACKGROUND = "#796000"
 
+export const ACCENT = "#f700cc"
+export const ACCENT_BACKGROUND = "#5a1749"
+
 export const CONNECTED = 'green'
 export const ERROR = 'red'
 
@@ -31,12 +34,14 @@ const theme = createMuiTheme({
     background: {
       default: '#111315',
       paper: BLACK,
-      primary: PRIMARY_BACKGROUND
+      primary: PRIMARY_BACKGROUND,
+      secondary: SECONDARY_BACKGROUND,
+      accent: ACCENT_BACKGROUND
     },
     text: {
       primary: PRIMARY,
       secondary: PRIMARY,
-      accent: PRIMARY,
+      accent: ACCENT,
       icon: PRIMARY,
       white: WHITE
     },

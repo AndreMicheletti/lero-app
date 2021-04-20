@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'VCRMono',
     fontWeight: 100,
     fontSize: 16,
-    color: theme.palette.text.accent
+    color: theme.palette.text.primary
   }
 }))
 

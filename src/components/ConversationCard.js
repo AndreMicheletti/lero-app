@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     gridColumnGap: 15,
     alignItems: 'center',
     backgroundColor: '#4f4f4f',
-    color: theme.palette.text.accent
+    color: theme.palette.text.primary
   }
 }))
 

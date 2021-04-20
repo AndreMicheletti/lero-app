@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { decryptMessage, parseBase64 } from '../crypto'
 
 import TerminalText from './TerminalText'
-import { WHITE, PRIMARY, SECONDARY } from '../theme'
+import { WHITE, PRIMARY, SECONDARY, ACCENT } from '../theme'
 
 const useStyles = makeStyles((theme) => ({
   line: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const YOU = PRIMARY
-const HIM = '#f700cc'
+const HIM = ACCENT
 
 function MessageBubble ({ yourName, targetName, content, time, direction }) {
   const classes = useStyles()
