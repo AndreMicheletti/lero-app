@@ -84,10 +84,10 @@ function LoginScreen (props) {
       props.enqueueSnackbar("Choose something funnier", { variant: 'info' })
       return
     }
-    if (newSecretCode.toLowerCase().toString().includes('admin')) {
-      props.enqueueSnackbar("You tried, ok... BLOCKED", { variant: 'warning' })
-      return
-    }
+    // if (newSecretCode.toLowerCase().toString().includes('admin')) {
+    //   props.enqueueSnackbar("You tried, ok... BLOCKED", { variant: 'warning' })
+    //   return
+    // }
     if (newSecretCode === '' || password === '' || name == '') {
       props.enqueueSnackbar('Fields missing', { variant: 'warning' })
     } else {

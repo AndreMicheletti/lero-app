@@ -10,8 +10,6 @@ import {
   Link,
 } from "react-router-dom"
 
-import owlIcon from './assets/owl.png'
-
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Container from '@material-ui/core/Container'
@@ -159,7 +157,6 @@ function App ({ account, ...props  }) {
             <Typography variant="h6">
               <Link to="/">
                 <div className={classes.toolbarWrapper}>
-                  <img src={owlIcon} className={classes.logo} />
                   <div className={classes.toolbarTitle}>
                     <span className={classes.appTitle}>Lero</span>
                     <SocketStatus />

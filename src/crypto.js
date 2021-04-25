@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js'
+import pass from './secret' 
 
 const JsonFormatter = {
   stringify: (cipherParams) => {
@@ -27,10 +28,10 @@ export const parseBase64 = (content) => {
   }
 };
 
-export const encryptMessage = (tkn, message) => JSON.parse(CryptoJS.AES.encrypt(message, tkn.iss, {
+export const encryptMessage = (tkn, message) => JSON.parse(CryptoJS.AES.encrypt(message, `${tkn.iss}${pass}`, {
   format: JsonFormatter
 }).toString());
 
-export const decryptMessage = (tkn, encryptedObject) => CryptoJS.AES.decrypt(encryptedObject, tkn.iss, {
+export const decryptMessage = (tkn, encryptedObject) => CryptoJS.AES.decrypt(encryptedObject, `${tkn.iss}${pass}`, {
   format: JsonFormatter
 }).toString(CryptoJS.enc.Utf8);

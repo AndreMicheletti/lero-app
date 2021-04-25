@@ -48,7 +48,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'SourceCodePro'
   },
   code: {
-    fontFamily: 'RetroGaming'
+    fontFamily: 'RetroGaming',
+    display: 'inline-block'
   },
   features: {
     display: 'flex',
@@ -120,19 +121,7 @@ function AboutScreen ({ account }) {
         <Chip
           className={classes.todoChip}
           variant="outlined"
-          label={"self-destructing messages"}
-          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
-        />
-        <Chip
-          className={classes.todoChip}
-          variant="outlined"
-          label={"metal gear-like stuff"}
-          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
-        />
-        <Chip
-          className={classes.todoChip}
-          variant="outlined"
-          label={"ghost-in-the-shell stuff"}
+          label={"gamification"}
           avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
         <Chip
@@ -156,13 +145,7 @@ function AboutScreen ({ account }) {
         <Chip
           className={classes.todoChip}
           variant="outlined"
-          label={"cool animations"}
-          avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
-        />
-        <Chip
-          className={classes.todoChip}
-          variant="outlined"
-          label={"language selector"}
+          label={"self-destructing messages"}
           avatar={<TodoIcon style={{ color: '#777', backgroundColor: 'transparent' }} />}
         />
       </div>

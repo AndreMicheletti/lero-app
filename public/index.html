@@ -35,9 +35,19 @@
         font-family: Aero;
         src: url("%PUBLIC_URL%/fonts/Aero.ttf"), url("%PUBLIC_URL%/fonts/Aero.ttf") format('ttf');
       }
-      /* body {
-        background-image: url("%PUBLIC_URL%/background2.jpg");
-      } */
+      body {
+        background-image: url("%PUBLIC_URL%/owl.png");
+        background-position: 50% 50%;
+        background-size: 20%;
+        background-repeat: no-repeat;
+        background-blend-mode: soft-light;
+        background-attachment: fixed;
+      }
+      @media only screen and (max-width: 600px) {
+        body {
+          background-size: 40%;
+        }
+      }
       * {
         font-family: SourceCodePro, RetroGaming, VCRMono, monospace;
       }
