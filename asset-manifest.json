@@ -1,18 +1,19 @@
 {
   "files": {
-    "main.js": "/lero-app/static/js/main.53046d5b.chunk.js",
-    "main.js.map": "/lero-app/static/js/main.53046d5b.chunk.js.map",
+    "main.js": "/lero-app/static/js/main.bfda98ab.chunk.js",
+    "main.js.map": "/lero-app/static/js/main.bfda98ab.chunk.js.map",
     "runtime-main.js": "/lero-app/static/js/runtime-main.2bb31133.js",
     "runtime-main.js.map": "/lero-app/static/js/runtime-main.2bb31133.js.map",
-    "static/js/2.c5f6ecb2.chunk.js": "/lero-app/static/js/2.c5f6ecb2.chunk.js",
-    "static/js/2.c5f6ecb2.chunk.js.map": "/lero-app/static/js/2.c5f6ecb2.chunk.js.map",
+    "static/js/2.cba6197b.chunk.js": "/lero-app/static/js/2.cba6197b.chunk.js",
+    "static/js/2.cba6197b.chunk.js.map": "/lero-app/static/js/2.cba6197b.chunk.js.map",
     "index.html": "/lero-app/index.html",
-    "static/js/2.c5f6ecb2.chunk.js.LICENSE.txt": "/lero-app/static/js/2.c5f6ecb2.chunk.js.LICENSE.txt",
-    "static/media/react_logo.928f956d.svg": "/lero-app/static/media/react_logo.928f956d.svg"
+    "static/js/2.cba6197b.chunk.js.LICENSE.txt": "/lero-app/static/js/2.cba6197b.chunk.js.LICENSE.txt",
+    "static/media/react_logo.928f956d.svg": "/lero-app/static/media/react_logo.928f956d.svg",
+    "static/media/rupee_blue.7711f201.svg": "/lero-app/static/media/rupee_blue.7711f201.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.2bb31133.js",
-    "static/js/2.c5f6ecb2.chunk.js",
-    "static/js/main.53046d5b.chunk.js"
+    "static/js/2.cba6197b.chunk.js",
+    "static/js/main.bfda98ab.chunk.js"
   ]
 }
