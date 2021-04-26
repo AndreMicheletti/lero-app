@@ -16,6 +16,7 @@ import {
   ON_UPD_CONVERSATION,
 } from '../actionTypes'
 import { BACKEND_URL } from '../../consts'
+import { encryptMessage, parseBase64 } from '../../crypto'
 
 export const selectConversation = (conversation) => { return {type: SELECT_CONVERSATION, payload: conversation} }
 
@@ -62,7 +63,7 @@ export const startConversation = (secretCode, onSuccess, onError) => async dispa
 
     const response = await axios.post(BACKEND_URL + '/api/message',
     {
-      'content': 'Vamos bater um lero',
+      'content': encryptMessage(parseBase64(token), 'Vamos bater um lero'),
       'secret_code': secretCode
     },
     { headers: { 'Authorization': `Bearer ${token}`} });
