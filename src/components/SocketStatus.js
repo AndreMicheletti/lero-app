@@ -8,8 +8,9 @@ import { CONNECTED, ERROR } from '../theme'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'baseline',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    textAlign: 'right'
   },
 }))
 
@@ -24,10 +25,10 @@ function SocketStatus ({ status }) {
 
   return (
     <div className={classes.root}>
-      <TerminalText color='#FFF' style={{ fontSize: '0.65em', fontWeight: 100, paddingRight: 5 }}> 
-        status: 
+      <TerminalText color='#FFF' style={{ fontSize: '1em', fontWeight: 100, paddingRight: 5 }}> 
+        status
       </TerminalText>
-      <TerminalText color={color} style={{ fontSize: '0.65em', fontWeight: 600 }}> 
+      <TerminalText color={color} style={{ fontSize: '1em', fontWeight: 600 }}> 
         {text}
       </TerminalText>
     </div>

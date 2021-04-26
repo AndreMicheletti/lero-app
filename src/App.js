@@ -33,10 +33,10 @@ import ConversationRouter from './screens/ConversationRouter'
 import LoginScreen from './screens/LoginScreen'
 import NewConversation from './screens/NewConversation'
 import UserStatus from './components/UserStatus'
-import SocketStatus from './components/SocketStatus'
 
 import { doLogout } from './store/actions/accountActions'
 import AboutScreen from './screens/AboutScreen'
+import Footer from './components/Footer'
 
 import { PRIMARY } from './theme'
 
@@ -112,6 +112,13 @@ const useStyles = makeStyles((theme) => ({
   hide: {
     display: 'none',
   },
+  footer: {
+    padding: theme.spacing(2, 1),
+    marginTop: 'auto',
+    zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: theme.palette.background.accent,
+    color: theme.palette.text.accent,
+  },
 }))
 
 
@@ -159,7 +166,6 @@ function App ({ account, ...props  }) {
                 <div className={classes.toolbarWrapper}>
                   <div className={classes.toolbarTitle}>
                     <span className={classes.appTitle}>Lero</span>
-                    <SocketStatus />
                   </div>
                 </div>
               </Link>
@@ -241,6 +247,10 @@ function App ({ account, ...props  }) {
             )}
           </Container>
         </main>
+
+      <footer className={classes.footer}>
+        <Footer />
+      </footer>
 
       </div>
     </Router>

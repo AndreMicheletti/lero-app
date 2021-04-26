@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'column',
-    minHeight: '100vh',
     flexGrow: 1,
     paddingTop: 15,
     padding: 8
