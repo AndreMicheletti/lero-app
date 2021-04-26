@@ -39,6 +39,7 @@ import AboutScreen from './screens/AboutScreen'
 import Footer from './components/Footer'
 
 import { PRIMARY } from './theme'
+import WalletScreen from './screens/WalletScreen'
 
 const drawerWidth = 240;
 
@@ -198,6 +199,11 @@ function App ({ account, ...props  }) {
                   {menuLink("/", "/conversations", <ForumIcon style={{ color: PRIMARY }} />)}
                   {menuLink("/new", "/start_new", <CreateIcon style={{ color: PRIMARY }} />)}
                 </List>
+                <Divider />
+                <List>
+                  {menuLink("/wallet", "/wallet", <ForumIcon style={{ color: PRIMARY }} />)}
+                </List>
+                <Divider />
                 <List>
                   <ListItem onClick={() => {
                     props.doLogout()
@@ -227,6 +233,9 @@ function App ({ account, ...props  }) {
                 </Route>
                 <Route path="/archived">
                   <p>Archived</p>
+                </Route>
+                <Route path="/wallet">
+                  <WalletScreen />
                 </Route>
                 <Route path="/new">
                   <NewConversation />
