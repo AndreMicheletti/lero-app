@@ -3,9 +3,17 @@ import { connect } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { PRIMARY } from '../theme'
-import CryptoCoin from '../components/CryptoCoin'
+import ExternalCryptoCoin from '../components/ExternalCryptoCoin'
 
 import rupeeIcon from '../assets/rupee_blue.svg'
+import btcIcon from '../assets/coins/btc.png'
+import ethIcon from '../assets/coins/eth.png'
+import ltcIcon from '../assets/coins/ltc.png'
+import rvnIcon from '../assets/coins/rvn.png'
+import sushiIcon from '../assets/coins/sushi.png'
+import usdtIcon from '../assets/coins/usdt.png'
+import xmrIcon from '../assets/coins/xmr.png'
+import xrpIcon from '../assets/coins/xrp.png'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,8 +21,6 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     maxHeight: '90vh',
     flexGrow: 1,
-    paddingTop: 15,
-    padding: 8,
     fontFamily: 'VCRMono',
     fontSize: '18px',
     color: PRIMARY,
@@ -26,6 +32,8 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'row',
     marginBottom: 40,
     fontSize: 22,
+    paddingTop: 15,
+    padding: 8,
   },
   headText: {
     marginLeft: 20,
@@ -40,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: 20,
     paddingBottom: 5,
     maxHeight: '40vh',
+    backgroundColor: '#00e5ff2e',
+    borderRadius: 10,
+    padding: 10,
   },
 }))
 
@@ -56,51 +67,14 @@ function WalletScreen ({ account }) {
         </div>
       </div>
       <div className={classes.coinList}>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
-        <CryptoCoin name="BTC" amount={0}>
-          <img src={rupeeIcon} width={38} height={38}/>
-        </CryptoCoin>
+        <ExternalCryptoCoin coinId="btc-bitcoin" name="BTC" amount={0} src={btcIcon} />
+        <ExternalCryptoCoin coinId="eth-ethereum" name="ETH" amount={0} src={ethIcon} />
+        <ExternalCryptoCoin coinId="ltc-litecoin" name="LTC" amount={0} src={ltcIcon} />
+        <ExternalCryptoCoin coinId="rvn-ravencoin" name="RVN" amount={0} src={rvnIcon} />
+        <ExternalCryptoCoin coinId="sushi-sushi" name="SUSHI" amount={0} src={sushiIcon} />
+        <ExternalCryptoCoin coinId="usdt-tether" name="USDT" amount={0} src={usdtIcon} />
+        <ExternalCryptoCoin coinId="xmr-monero" name="XMR" amount={0} src={xmrIcon} />
+        <ExternalCryptoCoin coinId="xrp-xrp" name="XRP" amount={0} src={xrpIcon} />
       </div>
     </div>
   )

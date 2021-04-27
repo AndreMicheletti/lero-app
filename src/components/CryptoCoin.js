@@ -1,12 +1,16 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
+import UpIcon from '@material-ui/icons/TrendingUp'
+import DownIcon from '@material-ui/icons/TrendingDown'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center'
 	},
+  coin: {},
   description: {
     display: 'flex',
     flexDirection: 'column',
@@ -31,18 +35,62 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function CryptoCoin ({ children, name, amount = 0 }) {
+function CryptoCoin ({ children, name, amount = 0, reversed = false, trending = null }) {
   const classes = useStyles()
+
+  const parseAmount = (x) => {
+    if (x > 10000) {
+      return x.toFixed(0)
+    } else if (x < 1) {
+      return x.toFixed(4).toString().padStart(3, '0')
+    } else {
+      return x.toFixed(0).toString().padStart(3, '0')
+    }
+  }
+
+  const renderTrending = () => {
+    const defaultStyle = { fontSize: 20, marginLeft: 5, marginRight: 5, fontWeight: 500 }
+    switch (trending) {
+      case 'up':
+        return <UpIcon style={{ ...defaultStyle, color: 'green' }} />
+      case 'down':
+        return <DownIcon style={{ ...defaultStyle, color: 'red' }} />
+      default:
+        return null
+    }
+  }
+
+  if (reversed) {
+    return (
+      <div className={classes.root} style={{ textAlign: 'right' }}>
+        <div className={classes.description}>
+          <span className={classes.name}>
+            {name}
+            {renderTrending()}
+          </span>
+          <span className={classes.amount}>
+            {parseAmount(amount)}
+          </span>
+        </div>
+        <div className={classes.coin}>
+          {children}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className={classes.root}>
-      {children}
+      <div className={classes.coin}>
+        {children}
+      </div>
       <div className={classes.description}>
         <span className={classes.name}>
           {name}
+          {renderTrending()}
         </span>
         <span className={classes.amount}>
-          {amount.toString().padStart(3, '0')}
+          {parseAmount(amount)}
         </span>
       </div>
     </div>
