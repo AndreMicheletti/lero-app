@@ -20,7 +20,11 @@ A `React` app to listen to LERO messages
 
 ### To Deploy
 
-- `npm run deploy`
-- `git remote update`
-- `git checkout gh-pages`
-- `git push github gh-pages`
+Requisitos
+ - `terraform`
+ - `az` azure cli
+ - estar logado no `az`
+
+Este projeto está deployado no Azure Cloud usando um `Storage Manager` com "static website" configurado. 
+
+Para deployar use o comando `make deploy`
